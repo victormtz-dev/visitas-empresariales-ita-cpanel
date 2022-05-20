@@ -2,8 +2,8 @@
 
 $host="localhost";
 $port="3306";
-$database ="tecnm_ita_visitas";
-$user ="root";
-$pass ="";
+$database ="conveni2_visitas";
+$user ="gestion";
+$pass ="vinculacion*12";
 
 ?>
