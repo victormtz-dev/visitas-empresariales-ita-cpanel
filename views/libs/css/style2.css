@@ -1,0 +1,27 @@
+.nav-color-tecnm{
+    background-color: #1B396A;
+}
+
+.tag {
+    background: #cccccc;
+    border-radius: 50px;
+    font-size: 12px;
+    margin: 0;
+    color: #fff;
+    padding: 2px 10px;
+    text-transform: uppercase;
+cursor:text;
+  }
+  .tag-teal {
+    background-color: #6a1b39
+  }
+  .tag-purple {
+    background-color: #396a1b
+  }
+  .tag-pink {
+    background-color: #cd5b9f;
+  }
+
+  .visitas-color{
+      color: #ff007a
+  }
