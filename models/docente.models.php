@@ -180,7 +180,7 @@ class ModeloDocente{
     {
         try {
             $stmt = DB::conectar()->prepare("SELECT visitas_detalles.nombre_contacto, visitas_detalles.nombre_empresa, visitas_detalles.estado_empresa, visitas_detalles.ciudad_empresa, visitas_detalles.objetivo_visita, visitas_detalles.fecha_inicio, visitas_detalles.turno_empresa
-            FROM visitas, visitas_detalles WHERE visitas.folio_visita = visitas_detalles.folio_visita and visitas.estatus_visita = 'ACEPTADA' and visitas_detalles.folio_visita = :folio_visita");
+            FROM visitas, visitas_detalles WHERE visitas.folio_visita = visitas_detalles.folio_visita and visitas_detalles.folio_visita = :folio_visita");
             $stmt->bindParam(":folio_visita", $id, PDO::PARAM_INT);
 
             $stmt->execute();

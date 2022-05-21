@@ -242,7 +242,7 @@ $formSelect = ControlladorAdministrador::ctrSelectPeriodo();
             </div>
             <div class="col-12">
                 <label for="inputDireccionEmpresa" class="form-label">Direccion:</label>
-                <input type="text" class="form-control" id="inputDireccionEmpresa" placeholder="Ej. Avenida Instituto Tecnológico S/N, Crucero del Cayaco C.P. 39905" name="direccionEmpresa<?php echo $i ?>" pattern="[a-zA-ZÀ-ÿ\u00f1\u00d1,./0-9 ]{2,400}" required>
+                <input type="text" class="form-control" id="inputDireccionEmpresa" placeholder="Ej. Avenida Instituto Tecnológico S/N, Crucero del Cayaco C.P. 39905" name="direccionEmpresa<?php echo $i ?>" pattern="[a-zA-ZÀ-ÿ\u00f1\u00d1,-./0-9 ]{2,400}" required>
             </div>
             <div class="col-6">
                 <label for="inputNombreContacto" class="form-label">Nombre de la persona a contactar de la empresa:</label>
