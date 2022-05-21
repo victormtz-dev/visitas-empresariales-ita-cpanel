@@ -18,7 +18,7 @@
                 </ul>
             </li>
             <li class="nav-item">
-                <a class="nav-link active" href="salirDocente">Cerrar Sesion</a>
+                <a class="nav-link active" href="salirDocente">Salir</a>
             </li>
         </ul>
     </div>

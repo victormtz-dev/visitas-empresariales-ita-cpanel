@@ -180,6 +180,17 @@ class ControlladorDocente
         return $respuesta;
     }
 
+    static public function ctrDatosCartaPresentacion1($folio){
+        $respuesta = ModeloDocente::mdlDatosPDF1($folio);
+        return $respuesta;
+    }
+
+    static public function ctrDatosCartaPresentacion2($id)
+    {
+        $respuesta = ModeloDocente::mdlDatosPDF2($id);
+        return $respuesta;
+    }
+
 }
 
 

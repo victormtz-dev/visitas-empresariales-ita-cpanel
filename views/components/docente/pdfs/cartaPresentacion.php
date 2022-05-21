@@ -1,16 +1,14 @@
 <?php
 require_once "../../../../models/conexion.php";
-require_once "../../../../controllers/estudiante.controller.php";
-require_once "../../../../models/estudiante.models.php";
+require_once "../../../../controllers/docente.controller.php";
+require_once "../../../../models/docente.models.php";
 
 ob_start();
 
-
-// $noControl = $_POST["noControl-pdf"];
 $folio = $_POST["folioVisita-pdf"];
 
-$datos_principales = ControlladorEstudiante::ctrDatosFormatoVisitaPDF($folio);
-$datosEmpresas = ControlladorEstudiante::ctrDatosEmpresasFormatoVisitaPDF($folio);
+$datos_principales = ControlladorDocente::ctrDatosCartaPresentacion1($folio);
+$datosEmpresas = ControlladorDocente::ctrDatosCartaPresentacion2($folio);
 
 
 $hoy = getdate();
@@ -29,7 +27,7 @@ $anio = $hoy["year"];
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=0.5">
     <meta charset="UTF-8">
-    <title>Formato para visita</title>
+    <title>Carta de presentación</title>
 
 
     <style>
@@ -48,14 +46,14 @@ $anio = $hoy["year"];
         .encabezado {
 
             display: block;
-            margin-left: 55%;
+            margin-left: 59%;
             height: 7em;
             font-size: 12px;
         }
 
         .cuerpo {
 
-            font-size: 13px;
+            font-size: 14px;
         }
 
 
@@ -101,10 +99,16 @@ $anio = $hoy["year"];
         .img-footer {
             width: 30px;
         }
+        
+        .parrafos{
+            text-align: justify;
+            font-size: 13px;
+        }
     </style>
 </head>
 <?php $i = 1; ?>
 <?php foreach ($datosEmpresas as $visita => $value) : ?>
+
     <body>
 
 
@@ -129,40 +133,52 @@ $anio = $hoy["year"];
             <br>
 
             <div class="encabezado">
-                <p>DEPARTAMENTO: GESTIÓN TEC. Y VINC.</p>
-                <p>FECHA DE CREACION: <?php echo $dia." de ".$mes." de ".$anio?></p>
-                <p><strong>ASUNTO: FORMATO PARA VISITA.</strong></p>
+                <p>Acapulco, Gro. <?php echo $dia . " de " . $mes . " de " . $anio ?></p>
+                <p>OFICIO No. <?php echo "GTV-0" . $datos_principales['folio_visita'] . "/" . $anio; ?></p>
+                <p><strong>ASUNTO: SOLICITUD DE VISITA.</strong></p>
             </div>
 
             <div class="cuerpo">
-                <p><strong>Folio: </strong> <?php echo "VE/".$datos_principales['folio_visita']; ?></p>
-                <p><strong>Docente: </strong> <?php echo $datos_principales['nombre_docente']; ?></p>
-                <p><strong>Carrera: </strong><?php echo $datos_principales['carrera']; ?></p>
-                <p><strong>Asignatura: </strong> <?php echo $datos_principales['asignatura']; ?></p>
-                <p><strong>Cantidad de alumnos: </strong> <?php echo $datos_principales['cantidad_alumnos']; ?></p>
+                <p style="margin-bottom: -10px;"><strong><?php echo $value['nombre_contacto']; ?></strong></p>
+                <p style="margin-bottom: -10px;"><strong><?php echo $value['nombre_empresa']; ?></strong></p>
+                <p><strong><?php echo $value['estado_empresa'] . "," . $value['ciudad_empresa']; ?></strong></p>
+                <p><strong>P R E S E N T E.</strong></p>
+                <div class="parrafos">
+                <p>Que el presente sirva para saludarle y con la finalidad de reforzar
+                    los conocimientos adquiridos en el aula, solicitarle sea autorizada una visita a las
+                    instalaciones de la empresa que usted atinadamente dirige, a un grupo de <?php echo $datos_principales['cantidad_alumnos'] - $datos_principales['lugares_disponibles']; ?> estudiantes de
+                    la carrera de <b><?php echo $datos_principales['carrera']; ?></b> de este Instituto,
+                    quienes acudirán bajo la responsabilidad de C. <b><?php echo $datos_principales['nombre_docente']; ?></b></p>
+                <p>
+                    El área a observar y objetivo de la visita es:
+                    <b><u><?php echo $value['objetivo_visita']; ?></u></b>
+                </p>
+                <p>
 
-                <h1 style="text-align: center;">Empresa No. <?php echo $i?></h1>
+                    De ser aceptada la visita, desearía que se programara para el día: <b><?php echo formatoFechas($value['fecha_inicio']); ?></b> en el turno
+                    <?php echo $value['turno_empresa']; ?>. Para cualquier aclaración puede comunicarse con ING. RODOLFO MENA ROJAS, a la extensión 120 de este instituto.
+                </p>
+                <p>
+                    Deseo hacerle saber que nuestra Institución se ha comprometido con los esquemas integrales de SGC-SGA (normas ISO 9001:2015 y 14001:2015), en donde, entre otros, la protección al medio ambiente es un punto medular; por lo tanto, solicito nos comunique requisitos de seguridad,presentación u otros aspectos, que deberán cubrir los participantes en la visita.
+                </p>
+                <p>
+                Agradezco la atención que tenga a bien brindar a la presente y me despido
+                </p>
+                </div>
 
-                <p><strong>Empresa a visitar: </strong><?php echo $value['nombre_empresa']; ?></p>
-                <p><strong>Tipo de empresa: </strong><?php echo $value['tipo_empresa']; ?></p>
-                <p><strong>Persona a contactar: </strong><?php echo $value['nombre_contacto']; ?></p>
-                <p><strong>Puesto: </strong><?php echo $value['cargo_contacto']; ?> <strong style="margin-left: 50px;">Telefono: </strong> <?php echo $value['numero_contacto']; ?></p>
-                <p><strong>Objetivo: </strong> <?php echo $value['objetivo_visita']; ?></p>
-                <p><strong>Departamento: </strong> <?php echo $value['area_empresa']; ?></p>
-                <p><strong>Observaciones: </strong> <?php echo $value['observaciones']; ?></p>
-                <p><strong>Fecha de inicio de la visita: </strong> <?php echo formatoFechas($value['fecha_inicio']); ?><strong style="margin-left: 50px;">Fecha de fin de la visita: </strong><?php echo formatoFechas($value['fecha_fin']); ?> </p>
+                <p style="text-align: left; margin-bottom: -7px;" ><b>A T E N T A M E N T E</b></p>
+                <p style="text-align: left; font-size:8px;"><i>"Educación Tecnológica con Compromiso Social®"</i></p>
+                <br>
+                <p style="text-align: left; margin-bottom: -14px; font-size:13px;"><b>RODOLFO MENA ROJAS.</b></p>
+                <p style="text-align: left; font-size:13px;" ><b>JEFE DEL DEPARTAMENTO DE GESTIÓN TECNOLOGICA Y VINCULACIÓN.</b></p>
             </div>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-           
             
-            <p style="text-align: left; font-size:8px;">c.c.p. Archivo</p>
+
+            <p style="text-align: left; font-size:8px; margin-bottom: -8px;">c.c.p. Depto. de Gestión Tecnológica y Vinculación.</p>
+            <p style="text-align: left; font-size:8px;">c.c.p. Estudiante</p>
         </div>
 
-        
+
         <table class="tb-footer">
             <tr>
                 <td>
@@ -193,7 +209,7 @@ $anio = $hoy["year"];
             </tr>
         </table>
     </body>
-<?php $i++; ?>
+    <?php $i++; ?>
 <?php endforeach ?>
 
 </html>
@@ -297,7 +313,7 @@ function formatoFechaHoy($mes)
             break;
     }
 
-   
+
     return $mes2;
 }
 
@@ -321,5 +337,5 @@ $dompdf->setPaper("letter");
 $dompdf->render();
 
 // Output the generated PDF to Browser
-$dompdf->stream('permiso-tutor-ITA.pdf', ['Attachment' => false]);
+$dompdf->stream('carta-presentacion-ITA.pdf', ['Attachment' => false]);
 ?>

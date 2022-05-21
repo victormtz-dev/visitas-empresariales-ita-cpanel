@@ -119,7 +119,7 @@ $datos = ControlladorEstudiante::ctrVisitasRegistradasDocumentos($_SESSION["no_c
                             </button>
                         </td>
 
-                        <td class="text-center"><a data-bs-toggle="tooltip" data-bs-placement="top" title="Descargar archivo"href="<?php echo $datos['pdf_permiso_padre'] ?>" download="<?php echo "ITA_NSS_".$_SESSION["no_control"] ?>"><i class="bi bi-file-earmark-arrow-down-fill" style="font-size: 2rem;"></i></a></td>
+                        <td class="text-center"><a data-bs-toggle="tooltip" data-bs-placement="top" title="Descargar archivo" href="<?php echo $datos['pdf_permiso_padre'] ?>" download="<?php echo "ITA_NSS_".$_SESSION["no_control"] ?>"><i class="bi bi-file-earmark-arrow-down-fill" style="font-size: 2rem;"></i></a></td>
 
                     <?php endif ?>
                 </tr>

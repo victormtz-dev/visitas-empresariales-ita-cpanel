@@ -173,7 +173,7 @@ class ModeloAdministrador
     static public function mdlListasVisitas(){
         try{
 
-            $stmt = DB::conectar()->prepare("SELECT folio_visita, periodo, carrera, asignatura, cantidad_alumnos, lugares_disponibles, tipo_visita, transporte, nombre_docente, correo_docente, telefono_docente, rfc_docente, estatus_visita, fecha_creacion FROM visitas");
+            $stmt = DB::conectar()->prepare("SELECT folio_visita, periodo, carrera, asignatura, cantidad_alumnos, lugares_disponibles, tipo_visita, transporte, nombre_docente, correo_docente, telefono_docente, rfc_docente, estatus_visita, fecha_creacion FROM visitas ORDER BY folio_visita DESC");
             
             $stmt->execute();
             return $stmt-> fetchAll();

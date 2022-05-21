@@ -76,7 +76,7 @@ $formSelect = ControlladorAdministrador::ctrSelectPeriodo();
         </div>
         <div class="col-6">
             <label for="inputMateria" class="form-label">Asignatura que pretende reforzar:</label>
-            <input type="text" class="form-control" id="inputMateria" placeholder="Ej. Ingenieria de Software" name="materia" required>
+            <input type="text" class="form-control" id="inputMateria" placeholder="Ej. Ingenieria de Software" name="materia" pattern="[a-zA-ZÀ-ÿ\u00f1\u00d1,. ]{2,254}" required>
         </div>
         <div class="col-6">
             <label for="inputCantidadAlumnos" class="form-label">Cantidad de alumnos contemplados para la visita:</label>
@@ -107,7 +107,7 @@ $formSelect = ControlladorAdministrador::ctrSelectPeriodo();
         <input type="hidden" name="idDocente" value="<?php echo $_SESSION['idDocente']; ?>">
         <div class="col-12">
             <label for="inputNombreDocente" class="form-label">Nombre del docente que estará encargado de la visita: (Anote su grado académico abreviado, si son más de dos docentes, solo anote un docente.)</label>
-            <input type="text" class="form-control" id="inputNombreDocente" placeholder="Ej. ING. RODOLFO MENA ROJAS" name="nombreDocente" required>
+            <input type="text" class="form-control" id="inputNombreDocente" placeholder="Ej. ING. RODOLFO MENA ROJAS" name="nombreDocente" pattern="[a-zA-ZÀ-ÿ\u00f1\u00d1,. ]{2,254}" required>
         </div>
         <div class="col-4">
             <label for="inputCorreoDocente" class="form-label">Correo electronico:</label>
@@ -167,12 +167,12 @@ $formSelect = ControlladorAdministrador::ctrSelectPeriodo();
 
             <div class="col-4">
                 <label for="inputNombreEmpresa" class="form-label">Nombre fiscal de la empresa:</label>
-                <input type="text" class="form-control" id="inputNombreEmpresa" placeholder="Ej. Nissan Mexicana S.A. de C.V." name="nombreFiscalEmpresa<?php echo $i ?>" required>
+                <input type="text" class="form-control" id="inputNombreEmpresa" placeholder="Ej. Nissan Mexicana S.A. de C.V." name="nombreFiscalEmpresa<?php echo $i ?>" pattern="[a-zA-ZÀ-ÿ\u00f1\u00d1,. ]{2,254}" required>
             </div>
             
             <div class="col-4">
                 <label for="inputNombreEmpresa" class="form-label">Nombre comercial de la empresa:</label>
-                <input type="text" class="form-control" id="inputNombreEmpresa" placeholder="Ej. Nissan Mexicana S.A. de C.V." name="nombreEmpresa<?php echo $i ?>" required>
+                <input type="text" class="form-control" id="inputNombreEmpresa" placeholder="Ej. Nissan Mexicana S.A. de C.V." name="nombreEmpresa<?php echo $i ?>" pattern="[a-zA-ZÀ-ÿ\u00f1\u00d1,. ]{2,254}" required>
             </div>
             <div class="col-4">
                 <label for="inputRfcEmpresa" class="form-label">RFC de la empresa:</label>
@@ -187,16 +187,16 @@ $formSelect = ControlladorAdministrador::ctrSelectPeriodo();
                 </select>
             </div>
             <div class="col-6">
-                <label for="inputAreaEmpresa" class="form-label">Area a visitar de la empresa:</label>
-                <input type="text" class="form-control" id="inputAreaEmpresa" placeholder="Ej. Recursos Humanos" name="areaEmpresa<?php echo $i ?>" pattern="[a-zA-Z ]{2,254}" required>
+                <label for="inputAreaEmpresa" class="form-label">Área a visitar de la empresa:</label>
+                <input type="text" class="form-control" id="inputAreaEmpresa" placeholder="Ej. Recursos Humanos" name="areaEmpresa<?php echo $i ?>" pattern="[a-zA-ZÀ-ÿ\u00f1\u00d1,. ]{2,254}" required>
             </div>
             <div class="col-12">
                 <label for="inputObjetivo" class="form-label">Objetivo de la visita a empresa:</label>
-                <input type="text" class="form-control" id="inputObjetivo" placeholder="Ej. Conocer el proceso de capacitación por parte del departamento de recursos humanos." name="objetivoVisita<?php echo $i ?>" required>
+                <input type="text" class="form-control" id="inputObjetivo" placeholder="Ej. Conocer el proceso de capacitación por parte del departamento de recursos humanos." name="objetivoVisita<?php echo $i ?>" pattern="[a-zA-ZÀ-ÿ\u00f1\u00d1,. ]{2,700}" required>
             </div>
             <div class="col-12">
                 <label for="inputObservaciones" class="form-label">Observaciones de la visita:</label>
-                <input type="text" class="form-control" id="inputObservaciones" placeholder="Ej. De ser posible, ver las consideraciones que se toman en cuenta en el proceso de capacitación de personal." name="observaciones<?php echo $i ?>" required>
+                <input type="text" class="form-control" id="inputObservaciones" placeholder="Ej. De ser posible, ver las consideraciones que se toman en cuenta en el proceso de capacitación de personal." name="observaciones<?php echo $i ?>" pattern="[a-zA-ZÀ-ÿ\u00f1\u00d1,. ]{2,700}" required>
             </div>
             <div class="col-6">
                 <label for="inputEstadoEmpresa" class="form-label">Estado:</label>
@@ -238,19 +238,19 @@ $formSelect = ControlladorAdministrador::ctrSelectPeriodo();
             </div>
             <div class="col-6">
                 <label for="inputCiudadEmpresa" class="form-label">Ciudad:</label>
-                <input type="text" class="form-control" id="inputCiudadEmpresa" placeholder="Ej. Los mochis" name="ciudadEmpresa<?php echo $i ?>" pattern="[a-zA-Z ]{2,254}" required>
+                <input type="text" class="form-control" id="inputCiudadEmpresa" placeholder="Ej. Los mochis" name="ciudadEmpresa<?php echo $i ?>" pattern="[a-zA-ZÀ-ÿ\u00f1\u00d1,. ]{2,254}" required>
             </div>
             <div class="col-12">
                 <label for="inputDireccionEmpresa" class="form-label">Direccion:</label>
-                <input type="text" class="form-control" id="inputDireccionEmpresa" placeholder="Ej. Avenida Instituto Tecnológico S/N, Crucero del Cayaco C.P. 39905" name="direccionEmpresa<?php echo $i ?>" required>
+                <input type="text" class="form-control" id="inputDireccionEmpresa" placeholder="Ej. Avenida Instituto Tecnológico S/N, Crucero del Cayaco C.P. 39905" name="direccionEmpresa<?php echo $i ?>" pattern="[a-zA-ZÀ-ÿ\u00f1\u00d1,./0-9 ]{2,400}" required>
             </div>
             <div class="col-6">
                 <label for="inputNombreContacto" class="form-label">Nombre de la persona a contactar de la empresa:</label>
-                <input type="text" class="form-control" id="inputNombreContacto" placeholder="" name="nombreContacto<?php echo $i ?>" required>
+                <input type="text" class="form-control" id="inputNombreContacto" placeholder="" name="nombreContacto<?php echo $i ?>" pattern="[a-zA-ZÀ-ÿ\u00f1\u00d1,. ]{2,254}" required>
             </div>
             <div class="col-6">
                 <label for="inputCargoContacto" class="form-label">Cargo de la persona a contactar de la empresa:</label>
-                <input type="text" class="form-control" id="inputCargoContacto" placeholder="Ej. Jefe de Recursos Humanos" name="cargoContacto<?php echo $i ?>" required>
+                <input type="text" class="form-control" id="inputCargoContacto" placeholder="Ej. Jefe de Recursos Humanos" name="cargoContacto<?php echo $i ?>" pattern="[a-zA-ZÀ-ÿ\u00f1\u00d1,. ]{2,254}" required>
             </div>
             <div class="col-6">
                 <label for="inputCorreoContacto" class="form-label">Correo electronico de la persona a contactar de la empresa:</label>

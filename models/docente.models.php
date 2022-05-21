@@ -159,6 +159,40 @@ class ModeloDocente{
 
     }
 
+    static public function mdlDatosPDF1($folio)
+    {
+        try {
+            $stmt = DB::conectar()->prepare("SELECT folio_visita, nombre_docente, carrera, cantidad_alumnos, lugares_disponibles FROM visitas WHERE folio_visita = :folio_visita");
+            $stmt->bindParam(":folio_visita", $folio, PDO::PARAM_INT);
+
+            $stmt->execute();
+
+            return  $stmt->fetch();
+
+            $stmt->closeCursor();
+            $stmt = null;
+        } catch (Exception $e) {
+            return "error";
+        }
+    }
+
+    static public function mdlDatosPDF2($id)
+    {
+        try {
+            $stmt = DB::conectar()->prepare("SELECT visitas_detalles.nombre_contacto, visitas_detalles.nombre_empresa, visitas_detalles.estado_empresa, visitas_detalles.ciudad_empresa, visitas_detalles.objetivo_visita, visitas_detalles.fecha_inicio, visitas_detalles.turno_empresa
+            FROM visitas, visitas_detalles WHERE visitas.folio_visita = visitas_detalles.folio_visita and visitas.estatus_visita = 'ACEPTADA' and visitas_detalles.folio_visita = :folio_visita");
+            $stmt->bindParam(":folio_visita", $id, PDO::PARAM_INT);
+
+            $stmt->execute();
+
+            return  $stmt->fetchAll();
+
+            $stmt->closeCursor();
+            $stmt = null;
+        } catch (Exception $e) {
+            return "error";
+        }
+    }
 
 
 

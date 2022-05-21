@@ -43,12 +43,12 @@ $datos = ControlladorEstudiante::ctrDatosEstudiante($_SESSION["no_control"]);
                 <input type="hidden" class="form-control" id="inputControl" value="<?php echo $datos["no_control"] ?>">
                     <div class="col-6">
                         <label for="inputNombre" class="form-label">Nombre (s):</label>
-                        <input type="text" class="form-control" id="inputNombre" value="<?php echo $datos["nombres"] ?>" pattern="[a-zA-Z ]{2,254}" required>
+                        <input type="text" class="form-control" id="inputNombre" value="<?php echo $datos["nombres"] ?>" pattern="[a-zA-ZÀ-ÿ\u00f1\u00d1 ]{2,254}" required>
                     </div>
 
                     <div class="col-6">
                         <label for="inputApellido" class="form-label">Apellidos:</label>
-                        <input type="text" class="form-control" id="inputApellido" value="<?php echo $datos["apellidos"] ?>" pattern="[a-zA-Z ]{2,254}" required>
+                        <input type="text" class="form-control" id="inputApellido" value="<?php echo $datos["apellidos"] ?>" pattern="[a-zA-ZÀ-ÿ\u00f1\u00d1 ]{2,254}" required>
                     </div>
 
                     <div class="col-6">
@@ -77,7 +77,7 @@ $datos = ControlladorEstudiante::ctrDatosEstudiante($_SESSION["no_control"]);
                     </div>
 
                     <div class="col-6">
-                        <label for="inputSexo" class="form-label">Sexo:</label>
+                        <label for="inputSexo" class="form-label">Género:</label>
                         <select id="inputSexo" class="form-select" aria-label="Default select example" required>
                             <option disabled hidden value="<?php echo $datos["sexo"] ?>" selected><?php echo $datos["sexo"] ?></option>
                             <option value="MASCULINO">MASCULINO</option>
@@ -116,13 +116,13 @@ $datos = ControlladorEstudiante::ctrDatosEstudiante($_SESSION["no_control"]);
             </div>
             <div class="modal-footer">
                 <form action="" method="POST">
-                    <input type="text" id="inputControl-edit" name="controlEdit">
-                    <input type="text" id="inputNombre-edit" name="nombresEdit" pattern="[a-zA-Z ]{2,254}">
-                    <input type="text" id="inputApellido-edit" name="apellidosEdit" pattern="[a-zA-Z ]{2,254}">
-                    <input type="text" id="inputCorreo-edit" name="correoEdit" pattern="([Ll])\d{8}@acapulco\.tecnm\.mx">
-                    <input type="text" id="inputCarrera-edit" name="carreraEdit" >
-                    <input type="text" id="inputNSS-edit" name="nssEdit" minlength="11" maxlength="11">
-                    <input type="text" id="inputSexo-edit" name="sexoEdit">
+                    <input type="hidden" id="inputControl-edit" name="controlEdit">
+                    <input type="hidden" id="inputNombre-edit" name="nombresEdit">
+                    <input type="hidden" id="inputApellido-edit" name="apellidosEdit">
+                    <input type="hidden" id="inputCorreo-edit" name="correoEdit">
+                    <input type="hidden" id="inputCarrera-edit" name="carreraEdit" >
+                    <input type="hidden" id="inputNSS-edit" name="nssEdit" minlength="11" maxlength="11">
+                    <input type="hidden" id="inputSexo-edit" name="sexoEdit">
 
                     <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
                     <input type="submit" class="btn btn-success" name="editarDatosEstudiante" value="Guardar cambios">

@@ -21,7 +21,7 @@
                 <a class="nav-link active" href="datosEstudiante">Mis datos</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link active" href="salirEstudiante">Cerrar Sesion</a>
+                <a class="nav-link active" href="salirEstudiante">Salir</a>
             </li>
         </ul>
     </div>

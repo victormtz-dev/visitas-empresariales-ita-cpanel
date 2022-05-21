@@ -32,20 +32,16 @@ $datos = ControlladorDocente::ctrTablaVisitas($_POST["buscar"])
                         <td><?php echo formatoFechas($value["fecha_inicio"]); ?></td>
                         <td><?php echo formatoFechas($value["fecha_fin"]); ?></td>
                         <td><?php echo $value["estatus_visita"]; ?></td>
-                        <!-- <td>
-                                <div class="btn-group d-grid gap-2 d-md-flex justify-content-md-between">
-                                    <button type="button" class="btn btn-primary">Primary</button>
-                                    <button type="button" class="btn btn-secondary">Secondary</button>
-                                </div>
-                            </td> -->
                     </tr>
-
                 <?php endforeach ?>
             </tbody>
         </table>
     </div>
 
-    <button class="btn btn-success">Obtener carta de presentacion</button>
+    <form action="views/components/docente/pdfs/cartaPresentacion.php" method="post" target="_blank">
+        <input type="hidden" name="folioVisita-pdf" value="<?php echo $_POST["buscar"] ?>">
+        <button type="submit" class="btn btn-success ms-5" data-bs-toggle="tooltip" data-bs-placement="top" title="Formato de visitas"><i class="bi bi-file-pdf-fill me-2"></i>Obtener carta de presentacion</button>
+    </form>
 </div>
 
 

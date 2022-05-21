@@ -21,7 +21,7 @@
                     </ul> 
                 </li> 
                 <li class="nav-item">
-                    <a class="nav-link active" href="salirAdmin">Cerrar Sesion</a>
+                    <a class="nav-link active" href="salirAdmin">Salir</a>
                 </li>
             </ul>
         </div>

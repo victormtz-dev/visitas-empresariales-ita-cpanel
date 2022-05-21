@@ -43,7 +43,6 @@ $datos = ControlladorEstudiante::ctrVisitasRegistradas($_SESSION["no_control"]);
                     <th scope="col">Docente</th>
                     <th scope="col">Asignatura</th>
                     <th scope="col">Descarga de archivos</th>
-                    <th scope="col">Opciones</th>
                 </tr>
             </thead>
             <tbody>
@@ -58,45 +57,23 @@ $datos = ControlladorEstudiante::ctrVisitasRegistradas($_SESSION["no_control"]);
                             <div class="d-grid gap-2 d-md-flex ">
                                 <form action="views/components/estudiante/pdfs/formatoVisita.php" method="post" target="_blank">
                                     <input type="hidden" name="folioVisita-pdf" value="<?php echo $value["folio_visita"]; ?>">
-                                    <button type="submit" class="btn btn-outline-success ms-5" data-bs-toggle="tooltip" data-bs-placement="top" title="Formato de visitas"><i class="bi bi-download"></i></button>
+                                    <button type="submit" class="btn btn-outline-success ms-5" data-bs-toggle="tooltip" data-bs-placement="top" title="Formato de visitas"><i class="bi bi-download me-2"></i>Descargar formato de visitas</button>
                                 </form>
 
                                 <form action="views/components/estudiante/pdfs/permisoTutor.php" method="post" target="_blank">
                                     <input type="hidden" name="noControl-pdf" value="<?php echo $_SESSION["no_control"] ?>">
                                     <input type="hidden" name="folioVisita-pdf" value="<?php echo $value["folio_visita"]; ?>">
-                                    <button type="submit" class="btn btn-outline-warning ms-5" data-bs-toggle="tooltip" data-bs-placement="top" title="Permiso del tutor"><i class="bi bi-download"></i></button>
+                                    <button type="submit" class="btn btn-outline-warning ms-5" data-bs-toggle="tooltip" data-bs-placement="top" title="Permiso del tutor"><i class="bi bi-download me-2"></i>Descargar permiso del tutor</button>
                                 </form>
                                
                             </div>
-                        </td>
-                        <td>
-                            <form action="cargarDocumentos" method="POST">
-                                <input type="hidden" name="folioDocumentos" value="<?php echo $value["folio_visita"]; ?>">
-                                <input class="btn btn-outline-primary" type="submit" value="Subir documentos">
-                            </form>
                         </td>
                     </tr>
                 <?php endforeach ?>
             </tbody>
         </table>
-
     </div>
-
 </section>
-
-<?php
-
-// $ingreso = new ControlladorDocente();
-// $ingreso->ctrFormInicioDocente();
-
-
-// $respuesta = ControlladorEstudiante::ctrRegistrarDocumentos();
-// echo "<pre>"; print_r($respuesta); echo "</pre>";
-
-?>
-
-
-
 
 
 <!-- Modal -->

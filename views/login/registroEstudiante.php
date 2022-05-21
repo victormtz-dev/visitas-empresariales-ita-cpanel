@@ -12,16 +12,16 @@ include "views/includes/navbar.php"
             <form class="row" action="" method="POST">
 
                 <div class="col-xs-12 col-sm-12 col-md-6 form-floating mb-3">
-                    <input type="text" name="nombres" class="form-control form-control-a" id="floatingInput" placeholder="name@example.com" pattern="[a-zA-Z ]{2,254}" required>
+                    <input type="text" name="nombres" class="form-control form-control-a" id="floatingInput" placeholder="Nombres(S)" pattern="[a-zA-ZÀ-ÿ\u00f1\u00d1 ]{2,254}" required> 
                     <label for="floatingInput">Nombre(s)</label>
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-6 form-floating mb-3">
-                    <input type="text" name="apellidos" class="form-control form-control-a" id="floatingApellido" placeholder="name@example.com" pattern="[a-zA-Z ]{2,254}" required>
+                    <input type="text" name="apellidos" class="form-control form-control-a" id="floatingApellido" placeholder="Apellidos" pattern="[a-zA-ZÀ-ÿ\u00f1\u00d1 ]{2,254}" required>
                     <label for="floatingApellido">Apellidos</label>
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-6 form-floating mb-3">
                     <input type="email" name="correo" class="form-control form-control-a" id="floatingCorreo" placeholder="Correo Electronico Institucional" pattern="([Ll])\d{8}@acapulco\.tecnm\.mx" required>
-                    <label for="floatingCorreo">Correo</label>
+                    <label for="floatingCorreo">Correo Institucional</label>
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-6 form-floating mb-3">
                     <input type="number" name="noControl" class="form-control form-control-a" id="floatingNoControl" placeholder="Numero de Control" minlength="8" maxlength="8" required>
@@ -54,7 +54,7 @@ include "views/includes/navbar.php"
                         <option value="MASCULINO">MASCULINO</option>
                         <option value="FEMENINO">FEMENINO</option>
                     </select>
-                    <label for="floatingSelect">Genero</label>
+                    <label for="floatingSelect">Género</label>
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-6 form-floating mb-3">
                     <input type="password" name="password" class="form-control form-control-a" id="floatingContraseña" placeholder="Contraseña" required>
