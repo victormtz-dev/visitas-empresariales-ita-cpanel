@@ -5,17 +5,11 @@
     <a class="navbar-brand" href="menuDocente"><i class="bi bi-house-door-fill"></i></a>
     <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li class="nav-item dropdown">
-                <a class="nav-link active dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    Visitas a empresas
-                </a>
-                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <li><a class="dropdown-item" href="inicioVisita">Registrar una visita</a></li>
-                    <li>
-                        <hr class="dropdown-divider" />
-                    </li>
-                    <li><a class="dropdown-item" href="listaVisitas">Consulta de visitas</a></li>
-                </ul>
+            <li class="nav-item">
+                <a class="nav-link active" href="inicioVisita">Registrar Visita</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" href="listaVisitas">Consultar Visita</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link active" href="salirDocente">Salir</a>

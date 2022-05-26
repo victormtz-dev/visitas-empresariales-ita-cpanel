@@ -22,7 +22,7 @@
                     <a class="nav-link active" href="inicioDocente">Docentes</a>
                 </li> 
                 <li class="nav-item">
-                    <a class="nav-link active" href="inicioAdministrador">Admin</a>
+                    <a class="nav-link active" href="inicioAdministrador">Ingresar</a>
                 </li>
             </ul>
         </div>
