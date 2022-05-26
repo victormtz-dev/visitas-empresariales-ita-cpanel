@@ -173,7 +173,10 @@ class ModeloAdministrador
     static public function mdlListasVisitas(){
         try{
 
-            $stmt = DB::conectar()->prepare("SELECT folio_visita, periodo, carrera, asignatura, cantidad_alumnos, lugares_disponibles, tipo_visita, transporte, nombre_docente, correo_docente, telefono_docente, rfc_docente, estatus_visita, fecha_creacion FROM visitas ORDER BY folio_visita DESC");
+            $stmt = DB::conectar()->prepare("SELECT DISTINCT visitas.folio_visita, visitas.periodo, visitas.carrera, visitas_detalles.fecha_inicio, visitas.asignatura, visitas.cantidad_alumnos, visitas.lugares_disponibles, visitas.tipo_visita, visitas.transporte, visitas.nombre_docente, visitas.correo_docente, visitas.telefono_docente, visitas.rfc_docente, visitas.estatus_visita, visitas.fecha_creacion
+            FROM visitas, visitas_detalles
+            WHERE visitas.folio_visita = visitas_detalles.folio_visita
+            ORDER BY folio_visita DESC");
             
             $stmt->execute();
             return $stmt-> fetchAll();
@@ -184,6 +187,63 @@ class ModeloAdministrador
             return "error"; 
         } 
 
+    }
+
+    static public function mdlDatosDocente($folio)
+    {
+        try {
+            $stmt = DB::conectar()->prepare("SELECT * FROM visitas WHERE folio_visita = :folio_visita");
+            $stmt->bindParam(":folio_visita", $folio, PDO::PARAM_INT);
+
+            $stmt->execute();
+
+            return  $stmt->fetch();
+
+            $stmt->closeCursor();
+            $stmt = null;
+        } catch (Exception $e) {
+            return "error";
+        }
+    }
+
+    static public function mdlDatosEmpresas($id)
+    {
+        try {
+            $stmt = DB::conectar()->prepare("SELECT visitas_detalles.nombre_empresa, visitas_detalles.nombre_empresa_fiscal, visitas_detalles.tipo_empresa, visitas_detalles.nombre_contacto, visitas_detalles.cargo_contacto, visitas_detalles.numero_contacto, visitas_detalles.objetivo_visita, visitas_detalles.area_empresa, visitas_detalles.observaciones, visitas_detalles.fecha_inicio, visitas_detalles.fecha_fin, visitas_detalles.hora_fin, visitas_detalles.hora_inicio
+            FROM visitas, visitas_detalles WHERE visitas.folio_visita = visitas_detalles.folio_visita and visitas_detalles.folio_visita = :folio_visita");
+            $stmt->bindParam(":folio_visita", $id, PDO::PARAM_INT);
+
+            $stmt->execute();
+
+            return  $stmt->fetchAll();
+
+            $stmt->closeCursor();
+            $stmt = null;
+        } catch (Exception $e) {
+            return "error";
+        }
+    }
+
+    static public function mdlEstatusVisita($tabla, $folio, $estatus)
+    {
+        try {
+            $stmt = DB::conectar()->prepare("UPDATE $tabla SET estatus_visita = :estatus WHERE folio_visita = :folio_visita");
+
+            $stmt->bindParam(":estatus", $estatus, PDO::PARAM_STR);
+            $stmt->bindParam(":folio_visita", $folio, PDO::PARAM_INT);
+
+            if ($stmt->execute()) {
+                return "exito";
+                $stmt->closeCursor();
+            $stmt = null;
+            } else {
+                return "error";
+                $stmt->closeCursor();
+                $stmt = null;
+            }
+        } catch (Exception $e) {
+            return $e;
+        }
     }
 
 

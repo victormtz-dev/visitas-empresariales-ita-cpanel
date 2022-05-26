@@ -153,6 +153,44 @@ Class ControlladorAdministrador {
         return $respuesta;
     }
 
+    static public function ctrVisitasDocente($folio){
+        $respuesta = ModeloAdministrador::mdlDatosDocente($folio);
+        return $respuesta;
+    }
+
+    static public function ctrVisitasEmpresas($id)
+    {
+        $respuesta = ModeloAdministrador::mdlDatosEmpresas($id);
+        return $respuesta;
+    }
+
+    
+    static public function ctrEstatusVisita()
+    {
+        if (isset($_POST['editarEstatusVisita'])) {
+            if(!empty($_POST["folio"]) && !empty($_POST["estatusEdit"])){
+
+                
+                $tabla = "visitas";
+
+                $folio = $_POST["folio"];
+                $estatus = $_POST["estatusEdit"];
+
+                    
+                $respuesta = ModeloAdministrador::mdlEstatusVisita($tabla, $folio, $estatus);
+        
+                return $respuesta;
+            //return $folio;
+                
+
+            }else {
+                return "1";
+            }
+
+        }
+    }
+
+
 
 
 }
