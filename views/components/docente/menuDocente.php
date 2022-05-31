@@ -23,6 +23,15 @@ if(!isset( $_SESSION['validarIngresoDocente'])){
 </nav>
 
 
-<section>
-    
+
+<section class="container p-4">
+    <div class="row">
+        <div class="col-md-12 mx-auto">
+            <div class="">
+                <div class="card-body text-center">
+                    <h1>Registro de visitas a empresas</h1>
+                </div>
+            </div>
+        </div>
+    </div>
 </section>

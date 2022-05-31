@@ -47,6 +47,10 @@ $datos = ControlladorAdministrador::ctrTablaUsuarios();
                                 <input type="text" class="form-control" name="usuarioAlta" id="inputUsuario" required>
                             </div>
                             <div class="col-12">
+                                <label for="inputCorreo" class="form-label">Correo:</label>
+                                <input type="email" class="form-control" name="CorreoAlta" id="inputCorreo" required>
+                            </div>
+                            <div class="col-12">
                                 <label for="inputContraseña" class="form-label">Contraseña:</label>
                                 <input type="password" class="form-control" name="contraseñaAlta" id="inputContraseña" required>
                             </div>
@@ -55,6 +59,7 @@ $datos = ControlladorAdministrador::ctrTablaUsuarios();
                                 <input type="password" class="form-control" name="verificarAlta" id="inputVerificar" required>
                             </div>
                             <input type="submit" class="btn btn-success" name="registrarUsuario" value="Registrar">
+
                         </div>
                     </form>
                 </div>
@@ -84,15 +89,14 @@ $datos = ControlladorAdministrador::ctrTablaUsuarios();
                                     <td>
                                         <div class="btn-group d-grid gap-2 d-md-flex justify-content-md-between">
                                             <?php if ($value["estatus"] == 'ALTA') : ?>
-                                                <button class="btn btn-primary" data-bs-toggle="tooltip" data-bs-placement="top" title="Cambiar estatus a BAJA"
-                                                onclick="cambiarEstatusDocente(<?php echo 1 ?>, <?php echo $value['id_docente']; ?>)"
-                                                ><i class="bi bi-check-circle-fill"></i></button>
+                                                <button class="btn btn-primary" data-bs-toggle="tooltip" data-bs-placement="top" title="Cambiar estatus a BAJA" onclick="cambiarEstatusDocente(<?php echo 1 ?>, <?php echo $value['id_docente']; ?>)"><i class="bi bi-check-circle-fill"></i></button>
 
                                             <?php else : ?>
-                                                <button class="btn btn-warning" data-bs-toggle="tooltip" data-bs-placement="top" title="Cambiar estatus a ALTA"
-                                                onclick="cambiarEstatusDocente(<?php echo 0 ?>, <?php echo $value['id_docente']; ?>)"><i class="bi bi-x-circle-fill"></i></button>
+                                                <button class="btn btn-warning" data-bs-toggle="tooltip" data-bs-placement="top" title="Cambiar estatus a ALTA" onclick="cambiarEstatusDocente(<?php echo 0 ?>, <?php echo $value['id_docente']; ?>)"><i class="bi bi-x-circle-fill"></i></button>
 
                                             <?php endif ?>
+
+                                            <button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModalCambiarPassword" data-bs-whatever="<?php echo $value['id_docente']; ?>" data-bs-placement="top" title="Cambiar estatus a ALTA"><i class="bi bi-pencil-square"></i></button>
                                         </div>
                                     </td>
                                 </tr>
@@ -104,6 +108,40 @@ $datos = ControlladorAdministrador::ctrTablaUsuarios();
         </div>
     </div>
 </section>
+
+<!-- Modal -->
+
+<div class="modal fade" id="exampleModalCambiarPassword" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel"></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p class="texto"></p>
+                <form action="" method="POST">
+                    <div class="row g-3">
+                        <div class="col-12">
+                            <label for="inputContraseña" class="form-label">Contraseña nueva:</label>
+                            <input type="password" class="form-control" name="passwordNuevo" id="inputContraseña" required>
+                        </div>
+                        <div class="col-12">
+                            <label for="inputVerificar" class="form-label">Verificar contraseña:</label>
+                            <input type="password" class="form-control" name="verificarNuevo" id="inputVerificar" required>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <input type="hidden" id="idUsuario" name="idUsuario">
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+                        <input type="submit" class="btn btn-success" name="nuevoPassword" value="Guardar cambios">
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 
 <?php
 $respuesta = ControlladorAdministrador::ctrRegistroUsuarios();
@@ -176,13 +214,13 @@ switch ($respuesta) {
                                  ";
         break;
 
-        case "2":
-            echo '<script> 
+    case "2":
+        echo '<script> 
                                          if(window.history.replaceState){
                                              window.history.replaceState(null, null, window.location.href);
                                          }
                                      </script>';
-            echo "
+        echo "
                                      <script> 
                                      Swal.fire({
                                          position: 'center',
@@ -194,14 +232,106 @@ switch ($respuesta) {
                                        
                                        </script>
                                      ";
-            break;
+        break;
+}
+
+
+$respuestaEdit = ControlladorAdministrador::ctrRestaurarPassword();
+switch ($respuestaEdit) {
+
+    case "exito":
+        echo '<script> 
+                                     if(window.history.replaceState){
+                                         window.history.replaceState(null, null, window.location.href);
+                                     }
+                                     
+                                 </script>';
+
+        echo "
+                                 <script> 
+                                 Swal.fire({
+                                     position: 'center',
+                                     icon: 'success',
+                                     title: 'Se ha cambiado la contraseña.',
+                                     showConfirmButton: false,
+                                     timer: 1500
+                                   });
+
+                                   setTimeout(function(){
+                                    window.location.reload();
+                                }, 2300);
+                                   
+                                   </script>
+                                 ";
+        break;
+
+    case "error":
+        echo '<script> 
+                                     if(window.history.replaceState){
+                                         window.history.replaceState(null, null, window.location.href);
+                                     }
+                                 </script>';
+        echo "
+                                 <script> 
+                                 Swal.fire({
+                                     position: 'center',
+                                     icon: 'error',
+                                     title: 'Error al ingresar datos.',
+                                     showConfirmButton: false,
+                                     timer: 1500
+                                   }) 
+                                   setTimeout(function(){
+                                    window.location.reload();
+                                }, 2300);
+                                   </script>
+                                 ";
+        break;
+
+    case "1":
+        echo '<script> 
+                                     if(window.history.replaceState){
+                                         window.history.replaceState(null, null, window.location.href);
+                                     }
+                                 </script>';
+        echo "
+                                 <script> 
+                                 Swal.fire({
+                                     position: 'center',
+                                     icon: 'error',
+                                     title: 'Favor de rellenar todos los campos.',
+                                     showConfirmButton: false,
+                                     timer: 1500
+                                   }) 
+                                   </script>
+                                 ";
+        break;
+
+    case "2":
+        echo '<script> 
+                                         if(window.history.replaceState){
+                                             window.history.replaceState(null, null, window.location.href);
+                                         }
+                                     </script>';
+        echo "
+                                     <script> 
+                                     Swal.fire({
+                                         position: 'center',
+                                         icon: 'error',
+                                         title: 'Las contraseñas no coinciden.',
+                                         showConfirmButton: false,
+                                         timer: 1500
+                                       }) 
+                                       
+                                       </script>
+                                     ";
+        break;
 }
 
 ?>
 
 <script type="text/javascript">
     function cambiarEstatusDocente(estatus, clave) {
-       
+
         var parametros = {
             "estatus": estatus,
             "clave": clave
@@ -211,15 +341,28 @@ switch ($respuesta) {
             type: 'POST',
             url: 'views/components/administrador/ajax/actualizarEstatusDocente.php',
             success: function(data) {
-              
-    
-             window.location.reload();
- 
+
+
+                window.location.reload();
+
 
             }
         });
     }
+
+
+    let exampleModal = document.getElementById('exampleModalCambiarPassword')
+
+    exampleModal.addEventListener('show.bs.modal', function(event) {
+        let button = event.relatedTarget
+        let recipient = button.getAttribute('data-bs-whatever')
+        let modalTitle = exampleModal.querySelector('.modal-title')
+        let modalBodyP = document.querySelector('.texto')
+
+        let folioInput = document.getElementById('idUsuario')
+        folioInput.value = recipient;
+
+        modalTitle.textContent = 'Restaurar contraseña';
+
+    })
 </script>
-
-
-

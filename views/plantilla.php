@@ -20,13 +20,11 @@ include "views/includes/header.php"
 </div>
 </header>
 
-
-
-
 <main>
     <?php
     if (isset($_GET["pagina"])) {
         if ( //login
+            $_GET["pagina"] == "inicio" ||
             $_GET["pagina"] == "inicioEstudiante" ||
             $_GET["pagina"] == "registroEstudiante" ||
             $_GET["pagina"] == "inicioDocente" ||
@@ -48,6 +46,7 @@ include "views/includes/header.php"
             $_GET["pagina"] == "salirAdmin" ||
             $_GET["pagina"] == "registrarPeriodos" ||
             $_GET["pagina"] == "registrarDocente" ||
+            $_GET["pagina"] == "consultaVisitasPorEmpresa" ||
             $_GET["pagina"] == "consultaVisitas"
         ) {
             include "views/components/administrador/" . $_GET["pagina"] . ".php";
@@ -71,7 +70,7 @@ include "views/includes/header.php"
             include "views/includes/error404.php";
         }
     } else {
-        include "views/login/inicioEstudiante.php";
+        include "views/login/inicio.php";
     }
     ?>
 </main>

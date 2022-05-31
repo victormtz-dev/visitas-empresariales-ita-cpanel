@@ -6,9 +6,10 @@ require_once "../../../../models/docente.models.php";
 ob_start();
 
 $folio = $_POST["folioVisita-pdf"];
+$detalles = $_POST["detalles"];
 
 $datos_principales = ControlladorDocente::ctrDatosCartaPresentacion1($folio);
-$datosEmpresas = ControlladorDocente::ctrDatosCartaPresentacion2($folio);
+$datosEmpresas = ControlladorDocente::ctrDatosCartaPresentacion2($detalles);
 
 
 $hoy = getdate();
@@ -106,8 +107,7 @@ $anio = $hoy["year"];
         }
     </style>
 </head>
-<?php $i = 1; ?>
-<?php foreach ($datosEmpresas as $visita => $value) : ?>
+
 
     <body>
 
@@ -139,9 +139,9 @@ $anio = $hoy["year"];
             </div>
 
             <div class="cuerpo">
-                <p style="margin-bottom: -10px;"><strong><?php echo $value['nombre_contacto']; ?></strong></p>
-                <p style="margin-bottom: -10px;"><strong><?php echo $value['nombre_empresa']; ?></strong></p>
-                <p><strong><?php echo $value['estado_empresa'] . "," . $value['ciudad_empresa']; ?></strong></p>
+                <p style="margin-bottom: -10px;"><strong><?php echo $datosEmpresas['nombre_contacto']; ?></strong></p>
+                <p style="margin-bottom: -10px;"><strong><?php echo $datosEmpresas['nombre_empresa']; ?></strong></p>
+                <p><strong><?php echo $datosEmpresas['estado_empresa'] . "," . $datosEmpresas['ciudad_empresa']; ?></strong></p>
                 <p><strong>P R E S E N T E.</strong></p>
                 <div class="parrafos">
                 <p>Que el presente sirva para saludarle y con la finalidad de reforzar
@@ -151,12 +151,12 @@ $anio = $hoy["year"];
                     quienes acudirán bajo la responsabilidad de C. <b><?php echo $datos_principales['nombre_docente']; ?></b></p>
                 <p>
                     El área a observar y objetivo de la visita es:
-                    <b><u><?php echo $value['objetivo_visita']; ?></u></b>
+                    <b><u><?php echo $datosEmpresas['objetivo_visita']; ?></u></b>
                 </p>
                 <p>
 
-                    De ser aceptada la visita, desearía que se programara para el día: <b><?php echo formatoFechas($value['fecha_inicio']); ?></b> en el turno
-                    <?php echo $value['turno_empresa']; ?>. Para cualquier aclaración puede comunicarse con ING. RODOLFO MENA ROJAS, a la extensión 120 de este instituto.
+                    De ser aceptada la visita, desearía que se programara para el día: <b><?php echo formatoFechas($datosEmpresas['fecha_inicio']); ?></b> en el turno
+                    <?php echo $datosEmpresas['turno_empresa']; ?>. Para cualquier aclaración puede comunicarse con ING. RODOLFO MENA ROJAS, a la extensión 120 de este instituto.
                 </p>
                 <p>
                     Deseo hacerle saber que nuestra Institución se ha comprometido con los esquemas integrales de SGC-SGA (normas ISO 9001:2015 y 14001:2015), en donde, entre otros, la protección al medio ambiente es un punto medular; por lo tanto, solicito nos comunique requisitos de seguridad,presentación u otros aspectos, que deberán cubrir los participantes en la visita.
@@ -209,8 +209,6 @@ $anio = $hoy["year"];
             </tr>
         </table>
     </body>
-    <?php $i++; ?>
-<?php endforeach ?>
 
 </html>
 

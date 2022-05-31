@@ -35,55 +35,68 @@ $datos = ControlladorAdministrador::ctrListasVisitas();
             Visitas a empresas registradas
         </h1>
     </div>
-    <div class="row mt-5 pt-2">
+    <div class="row mt-3">
         <div class="col-12">
-            <div id="datos_buscador">
-                <div class="container-fluid px-1 text-center">
-                    <div class="table-responsive">
-                        <table class="table align-middle table-bordered border-dark">
-                            <thead class="text-center align-middle">
-                                <tr class="text-center align-middle table-responsive-sm">
-                                    <th class="text-center align-middle">Folio</th>
-                                    <th class="text-center align-middle">Periodo</th>
-                                    <th class="text-center align-middle">Docente encargado</th>
-                                    <th class="text-center align-middle">Carrera</th>
-                                    <th class="text-center align-middle">Fecha</th>
-                                    <th class="text-center align-middle">Tipo de visita</th>
-                                    <th class="text-center align-middle">Transporte</th>
-                                    <th class="text-center align-middle">Estatus</th>
-                                    <th class="text-center align-middle">Opciones</th>
+            <div class="container-fluid px-1 text-center">
+                <div class="table-responsive">
+                    <table class="table align-middle table-bordered border-dark">
+                        <thead class="text-center align-middle">
+                            <tr class="text-center align-middle table-responsive-sm">
+                                <th class="text-center align-middle">Folio</th>
+                                <th class="text-center align-middle">Periodo</th>
+                                <th class="text-center align-middle">Docente encargado</th>
+                                <th class="text-center align-middle">Carrera</th>
+                                <th class="text-center align-middle">Fecha de mes</th>
+                                <th class="text-center align-middle">Fecha de registro</th>
+                                <th class="text-center align-middle">Tipo de visita</th>
+                                <th class="text-center align-middle">Transporte solicitado</th>
+                                <th class="text-center align-middle">Estatus</th>
+                                <th class="text-center align-middle">Opciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php foreach ($datos as $visita => $value) : ?>
+
+                                <tr>
+                                    <th><?php echo "VE/" . $value["folio_visita"]; ?></th>
+                                    <td><?php echo $value["periodo"]; ?></td>
+                                    <td><?php echo $value["nombre_docente"]; ?></td>
+                                    <td><?php echo $value["carrera"]; ?></td>
+                                    <td><?php echo formatoFechas($value["fecha_inicio"]); ?></td>
+                                    <td><?php echo $value["fecha_creacion"]; ?></td>
+                                    <td><?php echo $value["tipo_visita"]; ?></td>
+                                    <td><?php echo $value["transporte"]; ?></td>
+                                    <td><?php echo $value["estatus_visita"]; ?></td>
+                                    <td>
+                                        <div class="btn-group d-grid gap-2 d-md-flex justify-content-md-between">
+
+                                            <button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#exampleModalAdminVisitas" data-bs-whatever="<?php echo $value['folio_visita']; ?>" title="Editar estatus"><i class="bi bi-pencil-square"></i></button>
+
+                                            <form action="views/components/administrador/pdfs/formatoVisitasEmp.php" method="post" target="_blank">
+                                                <input type="hidden" name="folioVisita-pdf" value="<?php echo $value["folio_visita"]; ?>">
+                                                <button type="submit" class="btn btn-outline-danger " data-bs-toggle="tooltip" data-bs-placement="top" title="Formato de visitas"><i class="bi bi-file-earmark-pdf-fill"></i></button>
+                                            </form>
+
+                                            <form action="views/components/administrador/pdfs/listaAlumnos.php" method="post" target="_blank">
+                                                <input type="hidden" name="folioVisita-pdf" value="<?php echo $value["folio_visita"]; ?>">
+                                                <button type="submit" class="btn btn-outline-danger " data-bs-toggle="tooltip" data-bs-placement="top" title="Lista de alumnos"><i class="bi bi-file-earmark-pdf-fill"></i></button>
+                                            </form>
+
+                                            <form action="consultaVisitasPorEmpresa" method="post">
+                                                <input type="hidden" name="folioVisita" value="<?php echo $value["folio_visita"]; ?>">
+                                                <button type="submit" class="btn btn-outline-info " data-bs-toggle="tooltip" data-bs-placement="top" title="Empresas a visitar" ><i class="bi bi-building"></i></button>
+                                            </form>
+
+                                        
+                                        </div>
+                                    </td>
                                 </tr>
-                            </thead>
-                            <tbody>
-                                <?php foreach ($datos as $visita => $value) : ?>
-
-                                    <tr>
-                                        <th><?php echo "VE/" . $value["folio_visita"]; ?></th>
-                                        <td><?php echo $value["periodo"]; ?></td>
-                                        <td><?php echo $value["nombre_docente"]; ?></td>
-                                        <td><?php echo $value["carrera"]; ?></td>
-                                        <td><?php echo formatoFechas($value["fecha_inicio"]); ?></td>
-                                        <td><?php echo $value["tipo_visita"]; ?></td>
-                                        <td><?php echo $value["transporte"]; ?></td>
-                                        <td><?php echo $value["estatus_visita"]; ?></td>
-                                        <td>
-                                            <div class="btn-group d-grid gap-2 d-md-flex justify-content-md-between">
-
-                                                <button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#exampleModalAdminVisitas" data-bs-whatever="<?php echo $value['folio_visita']; ?>"><i class="bi bi-pencil-square"></i></button>
-
-                                                <form action="views/components/administrador/pdfs/formatoVisitasEmp.php" method="post" target="_blank">
-                                                    <input type="hidden" name="folioVisita-pdf" value="<?php echo $value["folio_visita"]; ?>">
-                                                    <button type="submit" class="btn btn-outline-danger " data-bs-toggle="tooltip" data-bs-placement="top" title="Formato de visitas General"><i class="bi bi-file-earmark-pdf-fill"></i></button>
-                                                </form>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                <?php endforeach ?>
-                            </tbody>
-                        </table>
-                    </div>
+                            <?php endforeach ?>
+                        </tbody>
+                    </table>
                 </div>
             </div>
+
         </div>
 </section>
 
@@ -106,7 +119,6 @@ $datos = ControlladorAdministrador::ctrListasVisitas();
                                 <option disabled hidden selected value="">Seleccione una opcion</option>
                                 <option value="ACEPTADA">ACEPTADA</option>
                                 <option value="PENDIENTE">PENDIENTE</option>
-                                <option value="EN CURSO">EN CURSO</option>
                                 <option value="RECHAZADA">RECHAZADA</option>
                                 <option value="FINALIZADA">FINALIZADA</option>
                             </select>
@@ -115,7 +127,7 @@ $datos = ControlladorAdministrador::ctrListasVisitas();
                     </div>
             </div>
             <div class="modal-footer">
-            
+
                 <input type="hidden" id="idVisita" name="folio">
 
                 <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
@@ -127,19 +139,19 @@ $datos = ControlladorAdministrador::ctrListasVisitas();
 </div>
 
 <?php
-        $formularioVisitas = ControlladorAdministrador::ctrEstatusVisita();
+$formularioVisitas = ControlladorAdministrador::ctrEstatusVisita();
 
-        
 
-        switch ($formularioVisitas) {
 
-            case "exito":
-                echo '<script> 
+switch ($formularioVisitas) {
+
+    case "exito":
+        echo '<script> 
                                      if(window.history.replaceState){
                                          window.history.replaceState(null, null, window.location.href);
                                      }
                                  </script>';
-                echo "
+        echo "
                                  <script> 
                                  Swal.fire({
                                      position: 'center',
@@ -155,15 +167,15 @@ $datos = ControlladorAdministrador::ctrListasVisitas();
 
                                    </script>
                                  ";
-                break;
+        break;
 
-            case "error":
-                echo '<script> 
+    case "error":
+        echo '<script> 
                                      if(window.history.replaceState){
                                          window.history.replaceState(null, null, window.location.href);
                                      }
                                  </script>';
-                echo "
+        echo "
                                  <script> 
                                  Swal.fire({
                                      position: 'center',
@@ -173,15 +185,15 @@ $datos = ControlladorAdministrador::ctrListasVisitas();
                                      timer: 1500
                                    }) </script>
                                  ";
-                break;
+        break;
 
-            case "1":
-                echo '<script> 
+    case "1":
+        echo '<script> 
                                      if(window.history.replaceState){
                                          window.history.replaceState(null, null, window.location.href);
                                      }
                                  </script>';
-                echo "
+        echo "
                                  <script> 
                                  Swal.fire({
                                      position: 'center',
@@ -191,15 +203,13 @@ $datos = ControlladorAdministrador::ctrListasVisitas();
                                      timer: 1500
                                    }) </script>
                                  ";
-                break;
-        }
+        break;
+}
 
 
-        ?>
+?>
 
 <script type="text/javascript">
-
-
     let exampleModal = document.getElementById('exampleModalAdminVisitas')
 
     exampleModal.addEventListener('show.bs.modal', function(event) {
@@ -211,8 +221,6 @@ $datos = ControlladorAdministrador::ctrListasVisitas();
         let folioInput = document.getElementById('idVisita')
         folioInput.value = recipient;
 
-        console.log(folioInput.value)
-        console.log(recipient)
         modalTitle.textContent = 'Cambio de estatus de la visita';
 
     })

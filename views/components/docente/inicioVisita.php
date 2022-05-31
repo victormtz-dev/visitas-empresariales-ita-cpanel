@@ -34,7 +34,7 @@ if (!isset($_SESSION['validarIngresoDocente'])) {
     <div class="row text-center mt-3">
         <div class="col-12">
             <h2>
-                Por favor, digite el numero de visitas.
+                Por favor, ingrese el número de visitas.
             </h2>
         </div>
     </div>

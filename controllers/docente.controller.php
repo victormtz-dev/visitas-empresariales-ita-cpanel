@@ -1,4 +1,8 @@
 <?php
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
+
 
 class ControlladorDocente
 {
@@ -48,8 +52,6 @@ class ControlladorDocente
             }
         }
     }
-
-
 
     static public function ctrFormVisitas()
     {
@@ -151,6 +153,55 @@ class ControlladorDocente
                                     "folio_visita" => $folioMax,
                                 );
 
+                                // $hoy = getdate();
+
+                                // $dia = $hoy["mday"];
+                                // $mes = formatoFechaHoy($hoy["mon"]);
+                                // $anio = $hoy["year"];
+
+                                // $hora = $hoy["hours"];
+                                // $minutos =  $hoy["minutes"];
+
+                                // $fechaRegistro = $dia . " de " . $mes . " de " . $anio;
+                                // $horaRegistro = $hora.":".$minutos."hrs.";
+
+                                $Object = new DateTime();  
+                                $fechaRegistro = $Object->format("d-m-Y"); 
+                                $horaRegistro = $Object->format("h:i:s a");  
+                                $fechaFormat = formatoFechas($fechaRegistro);
+                                
+                                $cuerpo = '
+                                Buen dia.<br> Se le notifica que ha registrado una visita el '.$fechaFormat.' a las '.$horaRegistro.'<br><br> Saludos.';
+                                
+                              
+                            
+                            
+                            $mail = new PHPMailer(true);
+                            
+                            try {
+                                
+                                $mail->isSMTP();
+                                $mail->Host = 'smtp.office365.com';
+                                $mail->SMTPAuth = true;
+                                $mail->Username = 'l17320909@acapulco.tecnm.mx';
+                                $mail->Password = 'victor_1307';
+                                $mail->SMTPSecure = 'tls';
+                                $mail->Port = 587;
+                            
+                                $mail->setFrom('l17320909@acapulco.tecnm.mx', 'DEPARTAMENTO DE GESTIÓN TECNOLOGIA Y VINCULACIÓN');
+                                $mail->addAddress($correoDocente);
+                                // $mail->addCC();  ->> si se quiere enviar una copia
+                            
+                                $mail->isHTML(true);
+                                $mail->Subject = 'Registro de visita';
+                                $mail->Body = $cuerpo;
+                                $mail->CharSet = 'UTF-8';
+                                $mail->send();
+                            } catch (Exception $e) {
+                                echo $e;
+                            }
+
+
                                 $respuesta2 = ModeloDocente::mdlRegistroDetallesVisitas($tabla2, $datos2);
                             }
                         }
@@ -163,7 +214,6 @@ class ControlladorDocente
             }
         }
     }
-
 
     static public function ctrListaVisitas()
     {
@@ -191,7 +241,61 @@ class ControlladorDocente
         return $respuesta;
     }
 
+
+}
+
+function formatoFechas($fecha)
+{
+
+    $dia = date("d", strtotime($fecha));
+    $mes = date("m", strtotime($fecha));
+    $anio = date("Y", strtotime($fecha));
+    $mes2 = "";
+
+    switch ($mes) {
+        case '01':
+            $mes2 = "ENERO";
+            break;
+        case '02':
+            $mes2 = "FEBRERO";
+            break;
+        case '03':
+            $mes2 = "MARZO";
+            break;
+        case '04':
+            $mes2 = "ABRIL";
+            break;
+        case '05':
+            $mes2 = "MAYO";
+            break;
+        case '06':
+            $mes2 = "JUNIO";
+            break;
+        case '07':
+            $mes2 = "JULIO";
+            break;
+        case '08':
+            $mes2 = "AGOSTO";
+            break;
+        case '09':
+            $mes2 = "SEPTIEMBRE";
+            break;
+        case '10':
+            $mes2 = "OCTUBRE";
+            break;
+        case '11':
+            $mes2 = "NOVIEMBRE";
+            break;
+        case '12':
+            $mes2 = "DICIEMBRE";
+            break;
+    }
+
+    $fechaFormateada = $dia . "-" . $mes2 . "-" . $anio;
+
+
+    return $fechaFormateada;
 }
 
 
-
+?>

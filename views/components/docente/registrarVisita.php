@@ -48,7 +48,7 @@ $formSelect = ControlladorAdministrador::ctrSelectPeriodo();
 <div class="container p-5">
 
     <!-- =========================INICIO DE DATOS DE LA VISITA. BLOQUE 1========================= -->
-    <h2>Datos de la visita</h2>
+    <h2>Datos de la visita: </h2>
     <form class="row g-3" action="" method="POST">
         <div class="col-md-6">
             <label for="inputPeriodo" class="form-label">Periodo:</label>
@@ -61,7 +61,7 @@ $formSelect = ControlladorAdministrador::ctrSelectPeriodo();
             </select>
         </div>
         <div class="col-md-6">
-            <label for="inputCarrera" class="form-label">Carrera:</label>
+            <label for="inputCarrera" class="form-label">Carrera / Programa academico:</label>
             <select id="inputCarrera" class="form-select" name="carrera" required>
                 <option disabled hidden selected value="">Seleccione una opcion</option>
                 <option value="ARQUITECTURA">ARQUITECTURA</option>
@@ -75,7 +75,7 @@ $formSelect = ControlladorAdministrador::ctrSelectPeriodo();
             </select>
         </div>
         <div class="col-6">
-            <label for="inputMateria" class="form-label">Asignatura que pretende reforzar:</label>
+            <label for="inputMateria" class="form-label">Asignatura a reforzar:</label>
             <input type="text" class="form-control" id="inputMateria" placeholder="Ej. Ingenieria de Software" name="materia" pattern="[a-zA-ZÀ-ÿ\u00f1\u00d1,. ]{2,254}" required>
         </div>
         <div class="col-6">
@@ -91,7 +91,7 @@ $formSelect = ControlladorAdministrador::ctrSelectPeriodo();
             </select>
         </div>
         <div class="col-6">
-            <label for="inputTransporte" class="form-label">Transporte:</label>
+            <label for="inputTransporte" class="form-label">Transporte solicitado:</label>
                 <select id="inputTransporte" class="form-select" name="transporte" required>
                     <option disabled hidden selected value="">Seleccione una opcion</option>
                     <option value="AUTOBUS">AUTOBUS (40 plazas)</option>
@@ -103,22 +103,22 @@ $formSelect = ControlladorAdministrador::ctrSelectPeriodo();
 
 
         <!-- =========================INICIO DE DATOS DEL DOCENTE. BLOQUE 2========================= -->
-        <h2>Datos del docente</h2>
+        <h2>Datos del docente: </h2>
         <input type="hidden" name="idDocente" value="<?php echo $_SESSION['idDocente']; ?>">
         <div class="col-12">
-            <label for="inputNombreDocente" class="form-label">Nombre del docente que estará encargado de la visita: (Anote su grado académico abreviado, si son más de dos docentes, solo anote un docente.)</label>
-            <input type="text" class="form-control" id="inputNombreDocente" placeholder="Ej. ING. RODOLFO MENA ROJAS" name="nombreDocente" pattern="[a-zA-ZÀ-ÿ\u00f1\u00d1,. ]{2,254}" required>
+            <label for="inputNombreDocente" class="form-label">Nombre del docente que estará como responsable de la visita: </label>
+            <input type="text" class="form-control" id="inputNombreDocente" placeholder="" name="nombreDocente" pattern="[a-zA-ZÀ-ÿ\u00f1\u00d1,. ]{2,254}" required>
         </div>
         <div class="col-4">
-            <label for="inputCorreoDocente" class="form-label">Correo electronico:</label>
-            <input type="email" class="form-control" id="inputCorreoDocente" placeholder="Ej. rodolfo.mr@acapulco.tecnm.mx" name="correoDocente" required>
+            <label for="inputCorreoDocente" class="form-label">Correo eléctronico institucional:</label>
+            <input type="email" class="form-control" id="inputCorreoDocente" placeholder="Ej. sunombre@acapulco.tecnm.mx" name="correoDocente" required>
         </div>
         <div class="col-4">
-            <label for="inputTelefonoDocente" class="form-label">Telefono:</label>
+            <label for="inputTelefonoDocente" class="form-label">Teléfono:</label>
             <input type="number" class="form-control" id="inputTelefonoDocente" placeholder="Ej. 7441900214" name="telefonoDocente" minlength="10" maxlength="10" required>
         </div>
         <div class="col-4">
-            <label for="inputRfcDocente" class="form-label">RFC:</label>
+            <label for="inputRfcDocente" class="form-label">RFC con homoclave:</label>
             <input type="text" class="form-control" id="inputRfcDocente" placeholder="Ej. MAAV980120APO" name="rfcDocente" required>
         </div>
         <!-- =========================FIN DE DATOS DEL DOCENTE. BLOQUE 2========================= -->
@@ -238,11 +238,11 @@ $formSelect = ControlladorAdministrador::ctrSelectPeriodo();
             </div>
             <div class="col-6">
                 <label for="inputCiudadEmpresa" class="form-label">Ciudad:</label>
-                <input type="text" class="form-control" id="inputCiudadEmpresa" placeholder="Ej. Los mochis" name="ciudadEmpresa<?php echo $i ?>" pattern="[a-zA-ZÀ-ÿ\u00f1\u00d1,. ]{2,254}" required>
+                <input type="text" class="form-control" id="inputCiudadEmpresa" placeholder="Ej. Acapulco de Juarez" name="ciudadEmpresa<?php echo $i ?>" pattern="[a-zA-ZÀ-ÿ\u00f1\u00d1,. ]{2,254}" required>
             </div>
             <div class="col-12">
-                <label for="inputDireccionEmpresa" class="form-label">Direccion:</label>
-                <input type="text" class="form-control" id="inputDireccionEmpresa" placeholder="Ej. Avenida Instituto Tecnológico S/N, Crucero del Cayaco C.P. 39905" name="direccionEmpresa<?php echo $i ?>" pattern="[a-zA-ZÀ-ÿ\u00f1\u00d1,-./0-9 ]{2,400}" required>
+                <label for="inputDireccionEmpresa" class="form-label">Direccion fisica:</label>
+                <input type="text" class="form-control" id="inputDireccionEmpresa" placeholder="" name="direccionEmpresa<?php echo $i ?>" pattern="[a-zA-ZÀ-ÿ\u00f1\u00d1,-./0-9 ]{2,400}" required>
             </div>
             <div class="col-6">
                 <label for="inputNombreContacto" class="form-label">Nombre de la persona a contactar de la empresa:</label>

@@ -246,5 +246,104 @@ class ModeloAdministrador
         }
     }
 
+    static public function mdlRestaurarPass($tabla, $usuario, $password)
+    {
+        try {
+            $stmt = DB::conectar()->prepare("UPDATE $tabla SET password = :password WHERE id_docente = :id_docente");
+
+            $stmt->bindParam(":password", $password, PDO::PARAM_STR);
+            $stmt->bindParam(":id_docente", $usuario, PDO::PARAM_INT);
+
+            if ($stmt->execute()) {
+                return "exito";
+                $stmt->closeCursor();
+            $stmt = null;
+            } else {
+                return "error";
+                $stmt->closeCursor();
+                $stmt = null;
+            }
+        } catch (Exception $e) {
+            return $e;
+        }
+    }
+
+
+    static public function mdlTablaEmpresas($folio){
+        try{
+
+            $stmt = DB::conectar()->prepare("SELECT visitas_detalles.id_detalles, visitas_detalles.folio_visita, visitas_detalles.nombre_empresa, visitas_detalles.nombre_contacto,visitas_detalles.fecha_inicio, visitas_detalles.fecha_fin FROM visitas_detalles, visitas WHERE visitas.folio_visita = visitas_detalles.folio_visita and visitas_detalles.folio_visita = :folio_visita");
+            $stmt->bindParam(":folio_visita", $folio, PDO::PARAM_INT);
+            $stmt->execute();
+            return $stmt-> fetchAll();
+
+        }catch(Exception $e) {
+            return "error"; 
+        } finally{
+            $stmt->closeCursor();
+            $stmt = null;
+        }
+
+    }
+
+    
+    static public function mdlTotalAlumnos($id, $sexo)
+    {
+        try {
+            if($sexo == 'MASCULINO' || $sexo == 'FEMENINO'){
+
+            $stmt = DB::conectar()->prepare("SELECT COUNT(estudiantes.sexo) as numero
+            FROM estudiantes, alumnos_visitas
+            WHERE estudiantes.no_control = alumnos_visitas.no_control and alumnos_visitas.folio_visita = :folio and estudiantes.sexo = :sexo");
+            $stmt->bindParam(":folio", $id, PDO::PARAM_INT);
+            $stmt->bindParam(":sexo", $sexo, PDO::PARAM_STR);
+
+            $stmt->execute();
+
+            return  $stmt->fetch();
+
+            $stmt->closeCursor();
+            $stmt = null;
+
+            }else{
+
+                $stmt = DB::conectar()->prepare("SELECT COUNT(estudiantes.sexo) as numero
+                FROM estudiantes, alumnos_visitas
+                WHERE estudiantes.no_control = alumnos_visitas.no_control and alumnos_visitas.folio_visita = :folio");
+                $stmt->bindParam(":folio", $id, PDO::PARAM_INT);
+    
+                $stmt->execute();
+    
+                return  $stmt->fetch();
+    
+                $stmt->closeCursor();
+                $stmt = null;
+
+            }
+        
+        } catch (Exception $e) {
+            return "error";
+        }
+    }
+
+    static public function mdlListaAlumnos($id)
+    {
+        try {
+            $stmt = DB::conectar()->prepare("SELECT estudiantes.no_control, estudiantes.nombres, estudiantes.apellidos, estudiantes.carrera
+            FROM estudiantes, alumnos_visitas
+            WHERE estudiantes.no_control = alumnos_visitas.no_control and alumnos_visitas.folio_visita = :folio ORDER BY estudiantes.no_control ASC");
+            $stmt->bindParam(":folio", $id, PDO::PARAM_INT);
+
+            $stmt->execute();
+
+            return  $stmt->fetchAll();
+
+            $stmt->closeCursor();
+            $stmt = null;
+        } catch (Exception $e) {
+            return "error";
+        }
+    }
+
 
 }

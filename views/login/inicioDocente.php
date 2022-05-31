@@ -7,7 +7,7 @@ include "views/includes/navbar.php"
         <div class="col-md-6 mx-auto">
             <div class="card border-ita-loginD">
                 <div class="card-header text-center" style="background-color: white;">
-                <h5>Iniciar sesión</h5>
+                <h5>Iniciar sesión: Docente</h5>
                 <i class="bi bi-person-workspace" style="font-size: 4rem;"></i>
                 </div>
                 <div class="card-body ">

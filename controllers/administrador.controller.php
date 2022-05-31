@@ -1,5 +1,13 @@
 <?php
 
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
+
+require 'views/libs/libreria/PHPmailer/src/PHPMailer.php';
+require 'views/libs/libreria/PHPmailer/src/SMTP.php';
+require 'views/libs/libreria/PHPmailer/src/Exception.php';
+
 Class ControlladorAdministrador {
 
     public function ctrFormInicioAdministrador() { 
@@ -110,20 +118,50 @@ Class ControlladorAdministrador {
 
     static public function ctrRegistroUsuarios(){
         if (isset($_POST['registrarUsuario'])) {
-            if(!empty($_POST["usuarioAlta"]) && !empty($_POST["contraseñaAlta"]) && !empty($_POST["verificarAlta"])){
-                //Encriptar la contraseña????????
+            if(!empty($_POST["usuarioAlta"]) && !empty($_POST["contraseñaAlta"]) && !empty($_POST["verificarAlta"])
+            && !empty($_POST["CorreoAlta"])){
+                
                 
                 $tabla = "docente";
                 $usuarioAdmin =  $_SESSION['usuario'];
                 $usuarioAlta = $_POST["usuarioAlta"];
-
+                $correo = $_POST["CorreoAlta"];
                 $password = $_POST["contraseñaAlta"];
                 $verificar = $_POST["verificarAlta"];
+               
 
                 if($password == $verificar){
                     
-                $respuesta = ModeloAdministrador::mdlRegistrarUsuario($tabla, $usuarioAdmin, $usuarioAlta, $password);
-        
+                    $respuesta = ModeloAdministrador::mdlRegistrarUsuario($tabla, $usuarioAdmin, $usuarioAlta, $password);
+                    $cuerpo = '
+                    Buen dia.<br> Sus credenciales para acceder a <a href="http://mx64.prueba.site/~conveni2/visitas2/inicioDocente" target="_blank">Visitas Empresariales</a> son las siguientes: <br><br> USUARIO: <strong>'.$usuarioAlta.'</strong> <br> CONTRASEÑA: <strong>'.$password.'</strong><br><br> Saludos.';
+                    
+                    $mail = new PHPMailer(true);
+                
+                    try {
+                    
+                        $mail->isSMTP();
+                        $mail->Host = 'smtp.office365.com';
+                        $mail->SMTPAuth = true;
+                        $mail->Username = 'l17320909@acapulco.tecnm.mx';
+                        $mail->Password = 'victor_1307';
+                        $mail->SMTPSecure = 'tls';
+                        $mail->Port = 587;
+                    
+                        $mail->setFrom('l17320909@acapulco.tecnm.mx', 'DEPARTAMENTO DE GESTIÓN TECNOLOGIA Y VINCULACIÓN');
+                        $mail->addAddress($correo);
+                    
+                        $mail->isHTML(true);
+                        $mail->Subject = 'Credenciales para registro de visitas empresariales';
+                        $mail->Body = $cuerpo;
+                        $mail->CharSet = 'UTF-8';
+                        $mail->send();
+                    } catch (Exception $e) {
+                    echo $e;
+                    }
+                
+
+
                 return $respuesta;
                 }else {
                     return "2";
@@ -188,6 +226,70 @@ Class ControlladorAdministrador {
             }
 
         }
+    }
+
+    static public function ctrRestaurarPassword()
+    {
+        if (isset($_POST['nuevoPassword'])) {
+            if(!empty($_POST["idUsuario"]) && !empty($_POST["passwordNuevo"]) && !empty($_POST["verificarNuevo"])){
+
+                
+                $tabla = "docente";
+                $usuario =  $_POST["idUsuario"];
+
+                $password = $_POST["passwordNuevo"];
+                $verificar = $_POST["verificarNuevo"];
+
+                if($password == $verificar){
+                    
+                $respuesta = ModeloAdministrador::mdlRestaurarPass($tabla, $usuario, $password);
+        
+                return $respuesta;
+                }else {
+                    return "2";
+                }
+
+                
+
+            }else {
+                return "1";
+            }
+
+        }
+    }
+
+
+    static public function ctrDatosEmpresas($folio)
+    {
+        $respuesta = ModeloAdministrador::mdlTablaEmpresas($folio);
+        return $respuesta;
+    }
+
+    static public function ctrCountAlumnos($id, $sexo)
+    {
+        $genero = '';
+
+        if($sexo == 'MASCULINO'){
+            $genero = 'MASCULINO';
+            $respuesta = ModeloAdministrador::mdlTotalAlumnos($id, $genero);
+            return $respuesta;
+
+        }else if($sexo == 'FEMENINO'){
+            $genero = 'FEMENINO';
+            $respuesta = ModeloAdministrador::mdlTotalAlumnos($id, $genero);
+            return $respuesta;
+        }else{
+            $genero = 'NINGUNO';
+            $respuesta = ModeloAdministrador::mdlTotalAlumnos($id, $genero);
+            return $respuesta;
+
+        }
+    }
+    static public function ctrListaAlumnos($id)
+    {
+        $respuesta = ModeloAdministrador::mdlListaAlumnos($id);
+        return $respuesta;
+
     }
 
 

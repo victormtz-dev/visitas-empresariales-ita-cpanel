@@ -13,12 +13,6 @@ $datos_principales = ControlladorAdministrador::ctrVisitasDocente($folio);
 $datosEmpresas = ControlladorAdministrador::ctrVisitasEmpresas($folio);
 
 
-$hoy = getdate();
-
-$dia = $hoy["mday"];
-$mes = formatoFechaHoy($hoy["mon"]);
-$anio = $hoy["year"];
-
 ?>
 
 <!DOCTYPE html>
@@ -182,45 +176,6 @@ $anio = $hoy["year"];
                
 
                 <h1 style="text-align: center;">Empresa No. <?php echo $i ?></h1>
-
-                <!-- <table style="width: 100%">
-                    <tr>
-                        <td>
-                            <p>
-                            <strong>Nombre fiscal: </strong><?php echo $value['nombre_empresa_fiscal']; ?>
-                            </p>
-                        </td>
-                        <td>
-                            <p>
-                                <strong>Nombre Comercial: </strong><?php echo $value['nombre_empresa']; ?>
-                            </p>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <p>
-                            <strong>Tipo de empresa: </strong><?php echo $value['tipo_empresa']; ?>
-                            </p>
-                        </td>
-                        <td>
-                            <p>
-                            <strong>Persona a contactar: </strong><?php echo $value['nombre_contacto']; ?>
-                            </p>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <p>
-                            <strong>Puesto: </strong><?php echo $value['cargo_contacto']; ?>
-                            </p>
-                        </td>
-                        <td>
-                            <p>
-                                <strong> Asignatura: </strong> <?php echo $datos_principales['asignatura']; ?>
-                            </p>
-                        </td>
-                    </tr>
-                </table> -->
 
                 <p><strong>Nombre fiscal: </strong><?php echo $value['nombre_empresa_fiscal']; ?><strong style="margin-left: 50px;">Nombre Comercial: </strong><?php echo $value['nombre_empresa']; ?></p>
                 <p><strong>Tipo de empresa: </strong><?php echo $value['tipo_empresa']; ?></p>

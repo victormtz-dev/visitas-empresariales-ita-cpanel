@@ -5,9 +5,7 @@ include "views/includes/navbar.php"
 <section class="container mt-3">
 
     <div class="row align-items-stretch">
-        <div class="col bg d-none d-lg-block col-md-5 col-lg-5 col-xl-5" style="background-color: blue;">
-        </div>
-        <div class="col">
+        <div class="col-md-8 mx-auto">
             <h2 class="fw-bold text-center mb-2">Registrarse</h2>
             <form class="row" action="" method="POST">
 
@@ -40,7 +38,7 @@ include "views/includes/navbar.php"
                         <option value="CONTADOR PÚBLICO">CONTADOR PÚBLICO</option>
                         <option value="MAESTRIA EN SISTEMAS COMPUTACIONALES">MAESTRIA EN SISTEMAS COMPUTACIONALES</option>
                     </select>
-                    <label for="floatingSelect">Carrera</label>
+                    <label for="floatingSelect">Programa Académico/Carrera</label>
                 </div>
 
                 <div class="col-xs-12 col-sm-12 col-md-6 form-floating mb-3">

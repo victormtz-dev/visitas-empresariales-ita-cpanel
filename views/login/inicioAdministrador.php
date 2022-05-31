@@ -6,7 +6,7 @@ include "views/includes/navbar.php"
         <div class="col-md-6 mx-auto">
             <div class="card border-ita-loginAd">
                 <div class="card-header text-center" style="background-color: white;">
-                <h5>Iniciar sesión</h5>
+                <h5>Iniciar sesión: Gestión y Vinculación</h5>
                 <i class="bi bi-person-lines-fill" style="font-size: 4rem;"></i>
   
                 </div>

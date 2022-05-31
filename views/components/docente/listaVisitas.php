@@ -44,7 +44,7 @@ $datosVisita = ControlladorDocente::ctrListaVisitas();
         <div class="col-3">
             <label for="inputPeriodo" class="form-label">Visitas empresariales:</label>
             <select onchange="buscar_ahora()" class="form-select" name="visitaBuscar" id="visitaBuscar" required autofocus>
-                <option disabled hidden value="" selected>Seleccione una visita</option>
+                <option disabled hidden value="" selected>Seleccione el periodo</option>
                 <?php foreach ($datosVisita as $opcion) :   ?>
                     <option value="<?php echo $opcion['folio_visita'] ?>"><?php echo "VE/" . $opcion['folio_visita'] . " -- " . $opcion['periodo']; ?></option>
                 <?php endforeach ?>
