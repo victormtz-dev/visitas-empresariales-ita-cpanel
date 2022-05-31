@@ -168,7 +168,7 @@ class ControlladorDocente
                                 $Object = new DateTime();  
                                 $fechaRegistro = $Object->format("d-m-Y"); 
                                 $horaRegistro = $Object->format("h:i:s a");  
-                                $fechaFormat = formatoFechas($fechaRegistro);
+                                $fechaFormat = formatoFechas3($fechaRegistro);
                                 
                                 $cuerpo = '
                                 Buen dia.<br> Se le notifica que ha registrado una visita el '.$fechaFormat.' a las '.$horaRegistro.'<br><br> Saludos.';
@@ -244,7 +244,7 @@ class ControlladorDocente
 
 }
 
-function formatoFechas($fecha)
+function formatoFechas3($fecha)
 {
 
     $dia = date("d", strtotime($fecha));

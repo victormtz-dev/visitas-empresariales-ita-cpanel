@@ -62,7 +62,7 @@ $datos = ControlladorAdministrador::ctrListasVisitas();
                                     <td><?php echo $value["periodo"]; ?></td>
                                     <td><?php echo $value["nombre_docente"]; ?></td>
                                     <td><?php echo $value["carrera"]; ?></td>
-                                    <td><?php echo formatoFechas($value["fecha_inicio"]); ?></td>
+                                    <td><?php echo formatoFechas2($value["fecha_inicio"]); ?></td>
                                     <td><?php echo $value["fecha_creacion"]; ?></td>
                                     <td><?php echo $value["tipo_visita"]; ?></td>
                                     <td><?php echo $value["transporte"]; ?></td>
@@ -227,7 +227,7 @@ switch ($formularioVisitas) {
 </script>
 
 <?php
-function formatoFechas($fecha)
+function formatoFechas2($fecha)
 {
 
 

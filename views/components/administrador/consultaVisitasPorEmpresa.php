@@ -57,8 +57,8 @@ $datos = ControlladorAdministrador::ctrDatosEmpresas($_POST["folioVisita"])
                                 <tr>
                                     <td><?php echo $value["nombre_empresa"]; ?></td>
                                     <td><?php echo $value["nombre_contacto"]; ?></td>
-                                    <td><?php echo formatoFechas($value["fecha_inicio"]); ?></td>
-                                    <td><?php echo formatoFechas($value["fecha_fin"]); ?></td>
+                                    <td><?php echo formatoFechas4($value["fecha_inicio"]); ?></td>
+                                    <td><?php echo formatoFechas4($value["fecha_fin"]); ?></td>
                                     <td>
                                         <form action="views/components/administrador/pdfs/cartaPresentacion.php" method="post" target="_blank">
                                             <input type="hidden" name="folioVisita-pdf" value="<?php echo $value["folio_visita"]?>">
@@ -78,7 +78,7 @@ $datos = ControlladorAdministrador::ctrDatosEmpresas($_POST["folioVisita"])
 </section>
 
 <?php
-function formatoFechas($fecha)
+function formatoFechas4($fecha)
 {
 
     $dia = date("d", strtotime($fecha));
