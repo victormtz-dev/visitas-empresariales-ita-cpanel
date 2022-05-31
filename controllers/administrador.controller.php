@@ -9,9 +9,9 @@ require 'C:/xampp/htdocs/visitas/views/libs/libreria/PHPmailer/src/SMTP.php';
 require 'C:/xampp/htdocs/visitas/views/libs/libreria/PHPmailer/src/Exception.php';
 */
 
-require '/home4/conveni2/public_html/visitas3/views/libs/libreria/PHPmailer/src/PHPMailer.php';
-require '/home4/conveni2/public_html/visitas3/views/libs/libreria/PHPmailer/src/SMTP.php';
-require '/home4/conveni2/public_html/visitas3/views/libs/libreria/PHPmailer/src/Exception.php';
+require '/home4/conveni2/public_html/visitass/views/libs/libreria/PHPmailer/src/PHPMailer.php';
+require '/home4/conveni2/public_html/visitass/views/libs/libreria/PHPmailer/src/SMTP.php';
+require '/home4/conveni2/public_html/visitass/views/libs/libreria/PHPmailer/src/Exception.php';
 
 
 Class ControlladorAdministrador {
@@ -140,7 +140,7 @@ Class ControlladorAdministrador {
                     
                     $respuesta = ModeloAdministrador::mdlRegistrarUsuario($tabla, $usuarioAdmin, $usuarioAlta, $password);
                     $cuerpo = '
-                    Buen dia.<br> Sus credenciales para acceder a <a href="http://mx64.prueba.site/~conveni2/visitas3/inicioDocente" target="_blank">Visitas Empresariales</a> son las siguientes: <br><br> USUARIO: <strong>'.$usuarioAlta.'</strong> <br> CONTRASEÑA: <strong>'.$password.'</strong><br><br> Saludos.';
+                    Buen dia.<br> Sus credenciales para acceder a <a href="http://mx64.prueba.site/~conveni2/visitass/inicioDocente" target="_blank">Visitas Empresariales</a> son las siguientes: <br><br> USUARIO: <strong>'.$usuarioAlta.'</strong> <br> CONTRASEÑA: <strong>'.$password.'</strong><br><br> Saludos.';
                     
                     $mail = new PHPMailer(true);
                 
