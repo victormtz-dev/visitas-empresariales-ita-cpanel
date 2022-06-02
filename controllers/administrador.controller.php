@@ -3,16 +3,16 @@
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
-
+/*
 require 'C:/xampp/htdocs/visitas/views/libs/libreria/PHPmailer/src/PHPMailer.php';
 require 'C:/xampp/htdocs/visitas/views/libs/libreria/PHPmailer/src/SMTP.php';
 require 'C:/xampp/htdocs/visitas/views/libs/libreria/PHPmailer/src/Exception.php';
+*/
 
-/*
 require '/home4/conveni2/public_html/visitass/views/libs/libreria/PHPmailer/src/PHPMailer.php';
 require '/home4/conveni2/public_html/visitass/views/libs/libreria/PHPmailer/src/SMTP.php';
 require '/home4/conveni2/public_html/visitass/views/libs/libreria/PHPmailer/src/Exception.php';
-*/
+
 
 Class ControlladorAdministrador {
 
