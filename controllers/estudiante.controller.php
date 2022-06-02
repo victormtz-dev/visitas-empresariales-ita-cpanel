@@ -133,13 +133,26 @@ class ControlladorEstudiante
     {
         if (isset($_POST['registrarseAVisita'])) {
 
-            if (!empty($_POST["idVisita"])) {
+            if (!empty($_POST["idVisita"]) && !empty($_POST["semestreVisita"]) && !empty($_POST["telefonoVisita"])
+                && !empty($_POST["tutorVisita"]) && !empty($_POST["telefonoTutorVisita"])) {
 
                 $folioVisita = $_POST["idVisita"];
                 $noControl = $_SESSION["no_control"];
                 $tabla = "alumnos_visitas";
+                $semestre = $_POST["semestreVisita"];
+                $telefono = $_POST["telefonoVisita"];
+                $tutor = mb_strtoupper($_POST["tutorVisita"], 'utf-8');
+                $tutorTelefono = $_POST["telefonoTutorVisita"];
+                
+                $datos = array(
+                    "semestre_cursando" => $semestre,
+                    "telefono_alumno" => $telefono,
+                    "nombre_tutor" => $tutor,
+                    "telefono_tutor" => $tutorTelefono,
+                );
 
-                $respuesta = ModeloEstudiante::mdlRegistroVisitaEstudiante($tabla, $folioVisita, $noControl);
+
+                $respuesta = ModeloEstudiante::mdlRegistroVisitaEstudiante($tabla, $folioVisita, $noControl, $datos);
 
                 return $respuesta;
             } else {

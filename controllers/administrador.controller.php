@@ -147,14 +147,14 @@ Class ControlladorAdministrador {
                     try {
                     
                         $mail->isSMTP();
-                        $mail->Host = 'smtp.office365.com';
+                        $mail->Host = 'smtp.gmail.com';
                         $mail->SMTPAuth = true;
-                        $mail->Username = 'l17320909@acapulco.tecnm.mx';
-                        $mail->Password = 'victor_1307';
-                        $mail->SMTPSecure = 'tls';
+                        $mail->Username = 'deptogestionyvinculacion@gmail.com';
+                        $mail->Password = 'gestion*99';
+                        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
                         $mail->Port = 587;
                     
-                        $mail->setFrom('l17320909@acapulco.tecnm.mx', 'DEPARTAMENTO DE GESTIÓN TECNOLOGIA Y VINCULACIÓN');
+                        $mail->setFrom('deptogestionyvinculacion@gmail.com', 'DEPARTAMENTO DE GESTIÓN TECNOLOGIA Y VINCULACIÓN');
                         $mail->addAddress($correo);
                     
                         $mail->isHTML(true);
@@ -299,7 +299,18 @@ Class ControlladorAdministrador {
 
     }
 
+    static public function ctrAlumnosPorVisita($folio)
+    {
+        $respuesta = ModeloAdministrador::mdlAlumnosPorVisita($folio);
+        return $respuesta;
+    }
 
+    static public function ctrAlumnos()
+    {   
+        $tabla = 'estudiantes';
+        $respuesta = ModeloAdministrador::mdlAlumnos($tabla);
+        return $respuesta;
+    }
 
 
 }

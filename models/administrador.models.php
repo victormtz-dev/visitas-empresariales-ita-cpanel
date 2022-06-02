@@ -329,10 +329,47 @@ class ModeloAdministrador
     static public function mdlListaAlumnos($id)
     {
         try {
-            $stmt = DB::conectar()->prepare("SELECT estudiantes.no_control, estudiantes.nombres, estudiantes.apellidos, estudiantes.carrera
+            $stmt = DB::conectar()->prepare("SELECT estudiantes.no_control, estudiantes.nombres, estudiantes.apellidos, estudiantes.carrera, estudiantes.nss
             FROM estudiantes, alumnos_visitas
             WHERE estudiantes.no_control = alumnos_visitas.no_control and alumnos_visitas.folio_visita = :folio ORDER BY estudiantes.no_control ASC");
             $stmt->bindParam(":folio", $id, PDO::PARAM_INT);
+
+            $stmt->execute();
+
+            return  $stmt->fetchAll();
+
+            $stmt->closeCursor();
+            $stmt = null;
+        } catch (Exception $e) {
+            return "error";
+        }
+    }
+
+    static public function mdlAlumnosPorVisita($id)
+    {
+        try {
+            $stmt = DB::conectar()->prepare("SELECT estudiantes.no_control, estudiantes.nombres, estudiantes.apellidos, estudiantes.carrera,estudiantes.sexo
+            FROM estudiantes, alumnos_visitas
+            WHERE estudiantes.no_control = alumnos_visitas.no_control and alumnos_visitas.folio_visita = :folio ORDER BY estudiantes.no_control ASC");
+            $stmt->bindParam(":folio", $id, PDO::PARAM_INT);
+
+            $stmt->execute();
+
+            return  $stmt->fetchAll();
+
+            $stmt->closeCursor();
+            $stmt = null;
+        } catch (Exception $e) {
+            return "error";
+        }
+    }
+
+    static public function mdlAlumnos($tabla)
+    {
+        try {
+            $stmt = DB::conectar()->prepare("SELECT no_control, nombres, apellidos, correo, estatus, estatus_editar
+            FROM $tabla
+            ORDER BY no_control ASC");
 
             $stmt->execute();
 

@@ -31,11 +31,14 @@ $datos = ControlladorEstudiante::ctrDatosEstudiante($_SESSION["no_control"]);
         Volver al inicio
     </a>
 
-    <div class="row text-center">
-        <h1>
-            DATOS PERSONALES
-        </h1>
-    </div>
+    <div class="p-3 mb-4 mt-2 border rounded-3" style="background-color: #e8ebf0;">
+        
+        <div class="row text-center">
+            <h2>
+                Datos personales
+            </h2>
+        </div>
+        </div>
     <div class="col-xs-12 col-sm-12 col-md-12">
         <div class="card border-ita-alumno">
             <div class="card-body">

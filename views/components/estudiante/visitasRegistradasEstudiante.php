@@ -30,13 +30,15 @@ $datos = ControlladorEstudiante::ctrVisitasRegistradas($_SESSION["no_control"]);
         </svg>
         Volver al inicio
     </a>
-    <div class="row text-center mt-4">
-        <h2>Visitas Empresariales registradas</h2>
+    <div class="p-3 mb-4 mt-2 border rounded-3" style="background-color: #e8ebf0;">
+        <div class="row text-center">
+            <h2>Visitas Empresariales registradas</h2>
+        </div>
     </div>
 
     <div class="row text-center mt-4 table-responsive">
         <table class="table">
-            <thead class="table-secondary">
+            <thead class="table-dark">
                 <tr>
                     <th scope="col">Folio</th>
                     <th scope="col">Periodo</th>
@@ -63,7 +65,7 @@ $datos = ControlladorEstudiante::ctrVisitasRegistradas($_SESSION["no_control"]);
                                 <form action="views/components/estudiante/pdfs/permisoTutor.php" method="post" target="_blank">
                                     <input type="hidden" name="noControl-pdf" value="<?php echo $_SESSION["no_control"] ?>">
                                     <input type="hidden" name="folioVisita-pdf" value="<?php echo $value["folio_visita"]; ?>">
-                                    <button type="submit" class="btn btn-outline-warning ms-5" data-bs-toggle="tooltip" data-bs-placement="top" title="Permiso del tutor"><i class="bi bi-download me-2"></i>Descargar permiso del tutor</button>
+                                    <button type="submit" class="btn btn-outline-danger ms-5" data-bs-toggle="tooltip" data-bs-placement="top" title="Permiso del tutor"><i class="bi bi-download me-2"></i>Descargar permiso del tutor</button>
                                 </form>
                                
                             </div>

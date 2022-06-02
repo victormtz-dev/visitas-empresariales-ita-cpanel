@@ -169,6 +169,9 @@ $alumnos = ControlladorAdministrador::ctrListaAlumnos($folio);
                     <td class="titulo">
                         <strong>Carrera</strong>
                     </td>
+                    <td class="titulo">
+                        <strong>NSS</strong>
+                    </td>
                 </tr>
                 <?php $i = 1; ?>
                 <?php foreach ($alumnos as $alumno => $value) : ?>
@@ -191,6 +194,10 @@ $alumnos = ControlladorAdministrador::ctrListaAlumnos($folio);
                         <td class="pd">
                             <p>
                                 <?php echo $value["carrera"] ?> </p>
+                        </td>
+                        <td class="pd">
+                            <p>
+                                <?php echo $value["nss"] ?> </p>
                         </td>
                     </tr>
                     <?php $i++; ?>

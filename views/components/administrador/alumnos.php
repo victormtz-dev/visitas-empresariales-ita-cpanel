@@ -14,7 +14,7 @@ if (!isset($_SESSION['validarIngresoAdmin'])) {
     }
 }
 
-$datos = ControlladorAdministrador::ctrDatosEmpresas($_POST["folioVisita"])
+$datos = ControlladorAdministrador::ctrAlumnos()
 ?>
 
 <nav class="navbar navbar-expand-lg navbar-dark nav-color-tecnm">
@@ -23,19 +23,17 @@ $datos = ControlladorAdministrador::ctrDatosEmpresas($_POST["folioVisita"])
 
 <section class="container-fluid mt-5">
     <div class="container">
-        <a class="btn btn-primary" href="consultaVisitas" role="button">
+        <a class="btn btn-primary" href="menuAdmin" role="button">
             <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-arrow-left-short" viewBox="0 0 16 16">
                 <path fill-rule="evenodd" d="M12 8a.5.5 0 0 1-.5.5H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5a.5.5 0 0 1 .5.5z" />
             </svg>
-            Regresar
+            Volver al inicio
         </a>
-
         <div class="row">
-            <div class="p-3 mb-4 mt-2 border rounded-3" style="background-color: #e8ebf0;">
+            <div class="p-3 mb-1 mt-2 border rounded-3" style="background-color: #e8ebf0;">
                 <h2 class="text-center">
-                    Empresas a visitar: <?php echo "VE/" . $_POST["folioVisita"] ?>
+                    Alumnos registrados en la plataforma
                 </h2>
-
             </div>
         </div>
     </div>
@@ -46,32 +44,22 @@ $datos = ControlladorAdministrador::ctrDatosEmpresas($_POST["folioVisita"])
                     <table class="table align-middle">
                         <thead class="text-center align-middle table-dark">
                             <tr class="text-center align-middle table-responsive-sm">
-                                <th class="text-center align-middle">Nombre de la empresa</th>
-                                <th class="text-center align-middle">Persona a contactar</th>
-                                <th class="text-center align-middle">Fecha de inicio de visita</th>
-                                <th class="text-center align-middle">Fecha de fin de visita</th>
-                                <th class="text-center align-middle">Opciones</th>
-                                <!-- <th class="text-center align-middle">Acciones </th> -->
+                                <th class="text-center align-middle">No. Control</th>
+                                <th class="text-center align-middle">Nombre(s)</th>
+                                <th class="text-center align-middle">Apellidos</th>
+                                <th class="text-center align-middle">Correo</th>
+                                <th class="text-center align-middle">Opciones</th> 
                             </tr>
                         </thead>
                         <tbody>
-                            <?php foreach ($datos as $visita => $value) : ?>
-
+                             <?php foreach ($datos as $visita => $value) : ?>
                                 <tr>
-                                    <td><?php echo $value["nombre_empresa"]; ?></td>
-                                    <td><?php echo $value["nombre_contacto"]; ?></td>
-                                    <td><?php echo formatoFechas4($value["fecha_inicio"]); ?></td>
-                                    <td><?php echo formatoFechas4($value["fecha_fin"]); ?></td>
-                                    <td>
-                                        <form action="views/components/administrador/pdfs/cartaPresentacion.php" method="post" target="_blank">
-                                            <input type="hidden" name="folioVisita-pdf" value="<?php echo $value["folio_visita"] ?>">
-                                            <input type="hidden" name="detalles" value="<?php echo $value["id_detalles"] ?>">
-                                            <button type="submit" class="btn btn-success ms-5" data-bs-toggle="tooltip" data-bs-placement="top" title="Formato de visitas"><i class="bi bi-file-pdf-fill me-2"></i>Obtener carta de presentacion</button>
-                                        </form>
-                                    </td>
+                                    <td><?php echo $value["no_control"]; ?></td>
+                                    <td><?php echo $value["nombres"]; ?></td>
+                                    <td><?php echo $value["apellidos"]; ?></td>
+                                    <td><?php echo $value["correo"]; ?></td>
                                 </tr>
-                            <?php endforeach ?>
-
+                            <?php endforeach ?> 
                         </tbody>
                     </table>
                 </div>
@@ -133,5 +121,4 @@ function formatoFechas4($fecha)
 
     return $fechaFormateada;
 }
-
 ?>

@@ -32,11 +32,13 @@ $datosVisita = ControlladorEstudiante::ctrListaVisitas();
         </svg>
         Volver al inicio
     </a>
+    <div class="p-3 mb-4 mt-2 border rounded-3" style="background-color: #e8ebf0;">
 
-    <div class="row text-center">
-        <h1>
-            CONSULTA DE VISITAS
-        </h1>
+        <div class="row text-center">
+            <h2>
+                Consulta de visitas
+            </h2>
+        </div>
     </div>
 
     <?php foreach ($datosVisita as $opcion) :   ?>
@@ -113,8 +115,8 @@ $datosVisita = ControlladorEstudiante::ctrListaVisitas();
                                         <path fill-rule="evenodd" d="M4 0h5.293A1 1 0 0 1 10 .293L13.707 4a1 1 0 0 1 .293.707V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2zm5.5 1.5v2a1 1 0 0 0 1 1h2l-3-3zM4.165 13.668c.09.18.23.343.438.419.207.075.412.04.58-.03.318-.13.635-.436.926-.786.333-.401.683-.927 1.021-1.51a11.651 11.651 0 0 1 1.997-.406c.3.383.61.713.91.95.28.22.603.403.934.417a.856.856 0 0 0 .51-.138c.155-.101.27-.247.354-.416.09-.181.145-.37.138-.563a.844.844 0 0 0-.2-.518c-.226-.27-.596-.4-.96-.465a5.76 5.76 0 0 0-1.335-.05 10.954 10.954 0 0 1-.98-1.686c.25-.66.437-1.284.52-1.794.036-.218.055-.426.048-.614a1.238 1.238 0 0 0-.127-.538.7.7 0 0 0-.477-.365c-.202-.043-.41 0-.601.077-.377.15-.576.47-.651.823-.073.34-.04.736.046 1.136.088.406.238.848.43 1.295a19.697 19.697 0 0 1-1.062 2.227 7.662 7.662 0 0 0-1.482.645c-.37.22-.699.48-.897.787-.21.326-.275.714-.08 1.103z" />
                                     </svg> Formato de visitas</a> -->
 
-                                
-                                    <a class="btn-a text-center" href="" role="button" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="<?php echo $opcion['periodo'] . "/" .  $opcion['folio_visita'] ?>">
+
+                                <a class="btn-a text-center" href="" role="button" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="<?php echo $opcion['periodo'] . "/" .  $opcion['folio_visita'] ?>">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-send-check-fill" viewBox="0 0 16 16">
                                         <path d="M15.964.686a.5.5 0 0 0-.65-.65L.767 5.855H.766l-.452.18a.5.5 0 0 0-.082.887l.41.26.001.002 4.995 3.178 1.59 2.498C8 14 8 13 8 12.5a4.5 4.5 0 0 1 5.026-4.47L15.964.686Zm-1.833 1.89L6.637 10.07l-.215-.338a.5.5 0 0 0-.154-.154l-.338-.215 7.494-7.494 1.178-.471-.47 1.178Z" />
                                         <path d="M16 12.5a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Zm-1.993-1.679a.5.5 0 0 0-.686.172l-1.17 1.95-.547-.547a.5.5 0 0 0-.708.708l.774.773a.75.75 0 0 0 1.174-.144l1.335-2.226a.5.5 0 0 0-.172-.686Z" />
@@ -131,7 +133,7 @@ $datosVisita = ControlladorEstudiante::ctrListaVisitas();
 
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel"></h5>
@@ -139,12 +141,45 @@ $datosVisita = ControlladorEstudiante::ctrListaVisitas();
             </div>
             <div class="modal-body">
                 <p class="folioID"></p>
+                <form action="" method="POST">
+                    <div class="row g-3">
+                        <div class="col-6">
+                            <label for="inputSemestre" class="form-label">Semestre cursando:</label>
+                            <select id="inputSemestre" class="form-select" name="semestreVisita" required>
+                                <option disabled hidden selected value="">Seleccione una opcion</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="9">9</option>
+                                <option value="10">10</option>
+                                <option value="11">11</option>
+                                <option value="12">12</option>
+                            </select>
+                        </div>
+                        <div class="col-6">
+                            <label for="inputTelefono" class="form-label">Teléfono:</label>
+                            <input type="number" class="form-control" id="inputTelefono" name="telefonoVisita" minlength="10" maxlength="10" required>
+                        </div>
+                        <div class="col-6">
+                            <label for="inputTutor" class="form-label">Nombre completo del tutor responsable:</label>
+                            <input type="text" class="form-control" id="inputTutor" name="tutorVisita" pattern="[a-zA-ZÀ-ÿ\u00f1\u00d1,. ]{2,254}"  required>
+                        </div>
+                        <div class="col-6">
+                            <label for="inputTelefono" class="form-label">Teléfono del tutor:</label>
+                            <input type="number" class="form-control" id="inputTelefono" name="telefonoTutorVisita" minlength="10" maxlength="10" required>
+                        </div>
+
+                    </div>
             </div>
             <div class="modal-footer">
-                <form action="" method="POST">
-                    <input type="hidden" name="idVisita" id="idVisita" value="">
-                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
-                    <input type="submit" class="btn btn-primary" name="registrarseAVisita" value="Registrarse en la visita">
+                <input type="hidden" name="idVisita" id="idVisita" value="">
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+                <input type="submit" class="btn btn-primary" name="registrarseAVisita" value="Registrarse en la visita">
                 </form>
             </div>
         </div>
@@ -262,7 +297,7 @@ switch ($respuesta) {
         var periodo = `${recipient.split("/")[0]}`
 
         modalTitle.textContent = 'Visita empresarial del periodo ' + periodo;
-        modalBodyP.textContent = '¿Seguro que se quiere registrar a la visita con folio VE/' + id + '?';
+        modalBodyP.textContent = 'Favor de completar los siguientes datos para el registro a la visita con folio VE/' + id;
         modalBodyInput.value = id;
     })
 </script>

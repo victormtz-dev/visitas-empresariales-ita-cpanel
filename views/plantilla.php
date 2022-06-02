@@ -47,6 +47,8 @@ include "views/includes/header.php"
             $_GET["pagina"] == "registrarPeriodos" ||
             $_GET["pagina"] == "registrarDocente" ||
             $_GET["pagina"] == "consultaVisitasPorEmpresa" ||
+            $_GET["pagina"] == "alumnosPorVisita" ||
+            $_GET["pagina"] == "alumnos" ||
             $_GET["pagina"] == "consultaVisitas"
         ) {
             include "views/components/administrador/" . $_GET["pagina"] . ".php";

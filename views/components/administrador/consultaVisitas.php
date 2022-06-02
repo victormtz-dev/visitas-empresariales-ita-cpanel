@@ -29,18 +29,20 @@ $datos = ControlladorAdministrador::ctrListasVisitas();
             </svg>
             Volver al inicio
         </a>
-    </div>
-    <div class="row">
-        <h1 class="text-center">
-            Visitas a empresas registradas
-        </h1>
+        <div class="row">
+            <div class="p-3 mb-4 mt-2 border rounded-3" style="background-color: #e8ebf0;">
+                <h2 class="text-center">
+                    Visitas a empresas registradas
+                </h2>
+            </div>
+        </div>
     </div>
     <div class="row mt-3">
         <div class="col-12">
             <div class="container-fluid px-1 text-center">
-                <div class="table-responsive">
-                    <table class="table align-middle table-bordered border-dark">
-                        <thead class="text-center align-middle">
+                <div class="table-responsive ">
+                    <table class="table align-middle">
+                        <thead class="text-center align-middle table-dark">
                             <tr class="text-center align-middle table-responsive-sm">
                                 <th class="text-center align-middle">Folio</th>
                                 <th class="text-center align-middle">Periodo</th>
@@ -70,24 +72,32 @@ $datos = ControlladorAdministrador::ctrListasVisitas();
                                     <td>
                                         <div class="btn-group d-grid gap-2 d-md-flex justify-content-md-between">
 
-                                            <button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#exampleModalAdminVisitas" data-bs-whatever="<?php echo $value['folio_visita']; ?>" title="Editar estatus"><i class="bi bi-pencil-square"></i></button>
+                                            <button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#exampleModalAdminVisitas" data-bs-whatever="<?php echo $value['folio_visita']; ?>" title="Editar estatus"><i class="bi bi-gear-fill"></i></button>
 
-                                            <form action="views/components/administrador/pdfs/formatoVisitasEmp.php" method="post" target="_blank">
+                                            <form action="editarVisita" method="post">
                                                 <input type="hidden" name="folioVisita-pdf" value="<?php echo $value["folio_visita"]; ?>">
                                                 <button type="submit" class="btn btn-outline-danger " data-bs-toggle="tooltip" data-bs-placement="top" title="Formato de visitas"><i class="bi bi-file-earmark-pdf-fill"></i></button>
                                             </form>
-
-                                            <form action="views/components/administrador/pdfs/listaAlumnos.php" method="post" target="_blank">
-                                                <input type="hidden" name="folioVisita-pdf" value="<?php echo $value["folio_visita"]; ?>">
-                                                <button type="submit" class="btn btn-outline-danger " data-bs-toggle="tooltip" data-bs-placement="top" title="Lista de alumnos"><i class="bi bi-file-earmark-pdf-fill"></i></button>
+                                            <!-- bi-pencil-square -->
+                                            <form action="consultaVisitasPorEmpresa" method="post">
+                                                <input type="hidden" name="folioVisita" value="<?php echo $value["folio_visita"]; ?>">
+                                                <button type="submit" class="btn btn-outline-secondary " data-bs-toggle="tooltip" data-bs-placement="top" title="Editar"><i class="bi bi-pencil-square"></i></button>
                                             </form>
 
                                             <form action="consultaVisitasPorEmpresa" method="post">
                                                 <input type="hidden" name="folioVisita" value="<?php echo $value["folio_visita"]; ?>">
-                                                <button type="submit" class="btn btn-outline-info " data-bs-toggle="tooltip" data-bs-placement="top" title="Empresas a visitar" ><i class="bi bi-building"></i></button>
+                                                <button type="submit" class="btn btn-outline-info " data-bs-toggle="tooltip" data-bs-placement="top" title="Empresas a visitar"><i class="bi bi-building"></i></button>
                                             </form>
 
-                                        
+                                            <form action="alumnosPorVisita" method="post">
+                                                <input type="hidden" name="folioVisita" value="<?php echo $value["folio_visita"]; ?>">
+                                                <button type="submit" class="btn btn-outline-warning " data-bs-toggle="tooltip" data-bs-placement="top" title="Lista de alumnos"><i class="bi bi-people-fill"></i></button>
+                                            </form>
+
+                                            <!-- <form action="views/components/administrador/pdfs/listaAlumnos.php" method="post" target="_blank">
+                                                <input type="hidden" name="folioVisita-pdf" value="<?php echo $value["folio_visita"]; ?>">
+                                                <button type="submit" class="btn btn-outline-danger " data-bs-toggle="tooltip" data-bs-placement="top" title="Lista de alumnos"><i class="bi bi-file-earmark-pdf-fill"></i></button>
+                                            </form> -->
                                         </div>
                                     </td>
                                 </tr>

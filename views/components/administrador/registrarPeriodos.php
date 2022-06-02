@@ -29,9 +29,12 @@ $datos = ControlladorAdministrador::ctrTablaPeriodos();
         </svg>
         Volver al inicio
     </a>
-    <div class="row text-center mt-4 mb-4">
-        <h2>Registrar periodo</h2>
+    <div class="p-3 mb-4 mt-2 border rounded-3" style="background-color: #e8ebf0;">
+        <div class="row text-center">
+            <h2>Registrar periodo</h2>
+        </div>
     </div>
+
 
     <div class="row">
         <div class="col-3">
@@ -57,8 +60,8 @@ $datos = ControlladorAdministrador::ctrTablaPeriodos();
         <div class="col">
             <div class="container-fluid px-1 text-center">
                 <div class="table-responsive">
-                    <table class="table align-middle table-bordered border-dark">
-                        <thead class="text-center align-middle">
+                    <table class="table align-middle">
+                        <thead class="text-center align-middle table-dark">
                             <tr class="text-center align-middle table-responsive-sm">
                                 <th class="text-center align-middle">Periodo</th>
                                 <th class="text-center align-middle">Responsable del registro</th>
@@ -77,13 +80,10 @@ $datos = ControlladorAdministrador::ctrTablaPeriodos();
                                     <td>
                                         <div class="btn-group d-grid gap-2 d-md-flex justify-content-md-between">
                                             <?php if ($value["estatus"] == 'ALTA') : ?>
-                                                <button class="btn btn-primary" data-bs-toggle="tooltip" data-bs-placement="top" title="Cambiar estatus a BAJA"
-                                                onclick="cambiarEstatus(<?php echo 1 ?>, <?php echo $value['id_periodo']; ?>)"
-                                                ><i class="bi bi-check-circle-fill"></i></button>
+                                                <button class="btn btn-primary" data-bs-toggle="tooltip" data-bs-placement="top" title="Cambiar estatus a BAJA" onclick="cambiarEstatus(<?php echo 1 ?>, <?php echo $value['id_periodo']; ?>)"><i class="bi bi-check-circle-fill"></i></button>
 
                                             <?php else : ?>
-                                                <button class="btn btn-warning" data-bs-toggle="tooltip" data-bs-placement="top" title="Cambiar estatus a ALTA"
-                                                onclick="cambiarEstatus(<?php echo 0 ?>, <?php echo $value['id_periodo']; ?>)"><i class="bi bi-x-circle-fill"></i></button>
+                                                <button class="btn btn-warning" data-bs-toggle="tooltip" data-bs-placement="top" title="Cambiar estatus a ALTA" onclick="cambiarEstatus(<?php echo 0 ?>, <?php echo $value['id_periodo']; ?>)"><i class="bi bi-x-circle-fill"></i></button>
 
                                             <?php endif ?>
                                         </div>
@@ -177,7 +177,7 @@ switch ($respuesta) {
 
 <script type="text/javascript">
     function cambiarEstatus(estatus1, clave1) {
-       
+
         var parametros = {
             "estatus": estatus1,
             "clave": clave1
@@ -187,15 +187,12 @@ switch ($respuesta) {
             type: 'POST',
             url: 'views/components/administrador/ajax/actualizarEstatusPeriodo.php',
             success: function(data) {
-              
-    
-             window.location.reload();
- 
+
+
+                window.location.reload();
+
 
             }
         });
     }
 </script>
-
-
-

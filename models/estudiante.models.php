@@ -87,7 +87,7 @@ class ModeloEstudiante
     }
 
 
-    static public function mdlRegistroVisitaEstudiante($tabla, $folio, $nocontrol)
+    static public function mdlRegistroVisitaEstudiante($tabla, $folio, $nocontrol, $datos)
     {
 
 
@@ -102,10 +102,14 @@ class ModeloEstudiante
             if ($stmt->fetch()) {
                 return "existe";
             } else {
-                $stmt = DB::conectar()->prepare("INSERT INTO $tabla(no_control, folio_visita) VALUES (:no_control, :folio_visita)");
+                $stmt = DB::conectar()->prepare("INSERT INTO $tabla(no_control, folio_visita, semestre_cursando, telefono_alumno, nombre_tutor, telefono_tutor) VALUES (:no_control, :folio_visita, :semestre_cursando, :telefono_alumno, :nombre_tutor, :telefono_tutor)");
 
                 $stmt->bindParam(":no_control", $nocontrol, PDO::PARAM_INT);
                 $stmt->bindParam(":folio_visita", $folio, PDO::PARAM_INT);
+                $stmt->bindParam(":semestre_cursando", $datos['semestre_cursando'], PDO::PARAM_STR);
+                $stmt->bindParam(":telefono_alumno", $datos['telefono_alumno'], PDO::PARAM_STR);
+                $stmt->bindParam(":nombre_tutor", $datos['nombre_tutor'], PDO::PARAM_STR);
+                $stmt->bindParam(":telefono_tutor", $datos['telefono_tutor'], PDO::PARAM_STR);
 
 
                 if ($stmt->execute()) {

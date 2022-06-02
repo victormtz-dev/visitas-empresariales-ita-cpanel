@@ -10,8 +10,8 @@ $estatus = '';
 
 <div class="container-fluid px-1 text-center">
     <div class="table-responsive">
-        <table class="table align-middle table-bordered border-dark">
-            <thead class="text-center align-middle">
+        <table class="table align-middle">
+            <thead class="text-center align-middle table-dark">
                 <tr class="text-center align-middle table-responsive-sm">
                     <th class="text-center align-middle">Folio</th>
                     <th class="text-center align-middle">Empresa</th>

@@ -29,8 +29,10 @@ $datos = ControlladorAdministrador::ctrTablaUsuarios();
         </svg>
         Volver al inicio
     </a>
-    <div class="row text-center mt-4 mb-4">
-        <h2>Registrar usuario</h2>
+    <div class="p-3 mb-4 mt-2 border rounded-3" style="background-color: #e8ebf0;">
+        <div class="row text-center">
+            <h2>Registrar usuario</h2>
+        </div>
     </div>
 
     <div class="row">
@@ -69,8 +71,8 @@ $datos = ControlladorAdministrador::ctrTablaUsuarios();
         <div class="col">
             <div class="container-fluid px-1 text-center">
                 <div class="table-responsive">
-                    <table class="table align-middle table-bordered border-dark">
-                        <thead class="text-center align-middle">
+                    <table class="table align-middle">
+                        <thead class="text-center align-middle table-dark">
                             <tr class="text-center align-middle table-responsive-sm">
                                 <th class="text-center align-middle">Usuario del docente</th>
                                 <th class="text-center align-middle">Responsable del registro</th>
@@ -160,14 +162,14 @@ switch ($respuesta) {
                                  Swal.fire({
                                      position: 'center',
                                      icon: 'success',
-                                     title: 'Se ha registrado satisfactoriamente.',
+                                     title: 'Se ha registrado satisfactoriamente. El usuario y contraseña fueron enviados por correo.',
                                      showConfirmButton: false,
-                                     timer: 1500
+                                     timer: 4000
                                    });
 
                                    setTimeout(function(){
                                     window.location.reload();
-                                }, 2300);
+                                }, 5000);
                                    
                                    </script>
                                  ";

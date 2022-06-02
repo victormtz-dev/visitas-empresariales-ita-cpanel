@@ -40,7 +40,6 @@ if (!isset($_SESSION['validarIngresoDocente'])) {
     </div>
     <div class="row">
         <div class="container p-4">
-            
                 <div class="col-md-6 mx-auto">
                     <form action="registrarVisita" method="POST">
                         <div class="form-group">
