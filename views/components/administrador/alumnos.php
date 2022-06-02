@@ -58,6 +58,18 @@ $datos = ControlladorAdministrador::ctrAlumnos()
                                     <td><?php echo $value["nombres"]; ?></td>
                                     <td><?php echo $value["apellidos"]; ?></td>
                                     <td><?php echo $value["correo"]; ?></td>
+                                    <td>
+                                        <div class="btn-group d-grid gap-2 d-md-flex justify-content-md-between">
+                                            <?php if ($value["estatus_editar"] == 'SIN EDITAR') : ?>
+                                                <button class="btn btn-primary" data-bs-toggle="tooltip" data-bs-placement="top" title="Deshabilitar edicion de datos" onclick="cambiarEstatus(<?php echo 1 ?>, <?php echo $value['no_control']; ?>)"><i class="bi bi-check-circle-fill"></i></button>
+
+                                            <?php else : ?>
+                                                <button class="btn btn-warning" data-bs-toggle="tooltip" data-bs-placement="top" title="Habilitar edicion de datos" onclick="cambiarEstatus(<?php echo 0 ?>, <?php echo $value['no_control']; ?>)"><i class="bi bi-x-circle-fill"></i></button>
+
+                                            <?php endif ?>
+                                            <button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModalCambiarPasswordAlumno" data-bs-whatever="<?php echo $value['no_control']; ?>" data-bs-placement="top" title="Restaurar contraseña"><i class="bi bi-key-fill"></i></button>
+                                        </div>
+                                    </td>
                                 </tr>
                             <?php endforeach ?> 
                         </tbody>
@@ -67,6 +79,133 @@ $datos = ControlladorAdministrador::ctrAlumnos()
         </div>
     </div>
 </section>
+
+
+<div class="modal fade" id="exampleModalCambiarPasswordAlumno" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel"></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p class="texto"></p>
+                <form action="" method="POST">
+                    <div class="row g-3">
+                        <div class="col-12">
+                            <label for="inputContraseña" class="form-label">Contraseña nueva:</label>
+                            <input type="password" class="form-control" name="passwordNuevoA" id="inputContraseña" required>
+                        </div>
+                        <div class="col-12">
+                            <label for="inputVerificar" class="form-label">Verificar contraseña:</label>
+                            <input type="password" class="form-control" name="verificarNuevoA" id="inputVerificar" required>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <input type="hidden" id="noControl" name="noControl">
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+                        <input type="submit" class="btn btn-success" name="nuevoPasswordA" value="Guardar cambios">
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<?php 
+
+$respuestaEdit = ControlladorAdministrador::ctrRestaurarPasswordAlumno();
+
+switch ($respuestaEdit) {
+
+    case "exito":
+        echo '<script> 
+                                     if(window.history.replaceState){
+                                         window.history.replaceState(null, null, window.location.href);
+                                     }
+                                     
+                                 </script>';
+
+        echo "
+                                 <script> 
+                                 Swal.fire({
+                                     position: 'center',
+                                     icon: 'success',
+                                     title: 'Se ha cambiado la contraseña. Se envio contraseña al correo del alumno.',
+                                     showConfirmButton: false,
+                                     timer: 1500
+                                   });
+
+                                   setTimeout(function(){
+                                    window.location.reload();
+                                }, 2300);
+                                   
+                                   </script>
+                                 ";
+        break;
+
+    case "error":
+        echo '<script> 
+                                     if(window.history.replaceState){
+                                         window.history.replaceState(null, null, window.location.href);
+                                     }
+                                 </script>';
+        echo "
+                                 <script> 
+                                 Swal.fire({
+                                     position: 'center',
+                                     icon: 'error',
+                                     title: 'Error al ingresar datos.',
+                                     showConfirmButton: false,
+                                     timer: 1500
+                                   }) 
+                                   setTimeout(function(){
+                                    window.location.reload();
+                                }, 2300);
+                                   </script>
+                                 ";
+        break;
+
+    case "1":
+        echo '<script> 
+                                     if(window.history.replaceState){
+                                         window.history.replaceState(null, null, window.location.href);
+                                     }
+                                 </script>';
+        echo "
+                                 <script> 
+                                 Swal.fire({
+                                     position: 'center',
+                                     icon: 'error',
+                                     title: 'Favor de rellenar todos los campos.',
+                                     showConfirmButton: false,
+                                     timer: 1500
+                                   }) 
+                                   </script>
+                                 ";
+        break;
+
+    case "2":
+        echo '<script> 
+                                         if(window.history.replaceState){
+                                             window.history.replaceState(null, null, window.location.href);
+                                         }
+                                     </script>';
+        echo "
+                                     <script> 
+                                     Swal.fire({
+                                         position: 'center',
+                                         icon: 'error',
+                                         title: 'Las contraseñas no coinciden.',
+                                         showConfirmButton: false,
+                                         timer: 1500
+                                       }) 
+                                       
+                                       </script>
+                                     ";
+        break;
+}
+
+?>
 
 <?php
 function formatoFechas4($fecha)
@@ -122,3 +261,41 @@ function formatoFechas4($fecha)
     return $fechaFormateada;
 }
 ?>
+
+<script type="text/javascript">
+    function cambiarEstatusDocente(estatus, clave) {
+
+        var parametros = {
+            "estatus": estatus,
+            "clave": clave
+        };
+        $.ajax({
+            data: parametros,
+            type: 'POST',
+            url: 'views/components/administrador/ajax/actualizarEstatusDocente.php',
+            success: function(data) {
+
+
+                window.location.reload();
+
+
+            }
+        });
+    }
+
+
+    let exampleModal = document.getElementById('exampleModalCambiarPasswordAlumno')
+
+    exampleModal.addEventListener('show.bs.modal', function(event) {
+        let button = event.relatedTarget
+        let recipient = button.getAttribute('data-bs-whatever')
+        let modalTitle = exampleModal.querySelector('.modal-title')
+        let modalBodyP = document.querySelector('.texto')
+
+        let folioInput = document.getElementById('noControl')
+        folioInput.value = recipient;
+
+        modalTitle.textContent = 'Restaurar contraseña';
+
+    })
+</script>

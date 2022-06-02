@@ -14,6 +14,7 @@ if (!isset($_SESSION['validarIngresoAdmin'])) {
     }
 }
 $datos = ControlladorAdministrador::ctrTablaUsuarios();
+
 ?>
 
 <nav class="navbar navbar-expand-lg navbar-dark nav-color-tecnm">
@@ -24,7 +25,7 @@ $datos = ControlladorAdministrador::ctrTablaUsuarios();
 
 <section class="container mt-5">
     <a class="btn btn-primary" href="menuAdmin" role="button">
-        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-arrow-left-short" viewBox="0 0 16 16">
+        <svg xmlns="http:ww.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-arrow-left-short" viewBox="0 0 16 16">
             <path fill-rule="evenodd" d="M12 8a.5.5 0 0 1-.5.5H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5a.5.5 0 0 1 .5.5z" />
         </svg>
         Volver al inicio
@@ -75,7 +76,7 @@ $datos = ControlladorAdministrador::ctrTablaUsuarios();
                         <thead class="text-center align-middle table-dark">
                             <tr class="text-center align-middle table-responsive-sm">
                                 <th class="text-center align-middle">Usuario del docente</th>
-                                <th class="text-center align-middle">Responsable del registro</th>
+                                <th class="text-center align-middle">Correo</th>
                                 <th class="text-center align-middle">Fecha y hora de registro</th>
                                 <th class="text-center align-middle">Estatus</th>
                                 <th class="text-center align-middle">Opciones</th>
@@ -85,7 +86,7 @@ $datos = ControlladorAdministrador::ctrTablaUsuarios();
                             <?php foreach ($datos as $periodo => $value) : ?>
                                 <tr>
                                     <td><?php echo $value["usuario"]; ?></td>
-                                    <td><?php echo $value["usuario_registro"]; ?></td>
+                                    <td><?php echo $value["correo"]; ?></td>
                                     <td><?php echo $value["fecha_registro"]; ?></td>
                                     <td><?php echo $value["estatus"]; ?></td>
                                     <td>
@@ -98,10 +99,11 @@ $datos = ControlladorAdministrador::ctrTablaUsuarios();
 
                                             <?php endif ?>
 
-                                            <button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModalCambiarPassword" data-bs-whatever="<?php echo $value['id_docente']; ?>" data-bs-placement="top" title="Cambiar estatus a ALTA"><i class="bi bi-pencil-square"></i></button>
+                                            <button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModalCambiarPassword" data-bs-whatever="<?php echo $value['id_docente']; ?>" data-bs-placement="top" title="Restaurar contraseña"><i class="bi bi-key-fill"></i></button>
                                         </div>
                                     </td>
                                 </tr>
+                            
                             <?php endforeach ?>
                         </tbody>
                     </table>
@@ -239,6 +241,7 @@ switch ($respuesta) {
 
 
 $respuestaEdit = ControlladorAdministrador::ctrRestaurarPassword();
+
 switch ($respuestaEdit) {
 
     case "exito":

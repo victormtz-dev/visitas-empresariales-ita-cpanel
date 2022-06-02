@@ -79,10 +79,10 @@ $datos = ControlladorAdministrador::ctrListasVisitas();
                                                 <button type="submit" class="btn btn-outline-danger " data-bs-toggle="tooltip" data-bs-placement="top" title="Formato de visitas"><i class="bi bi-file-earmark-pdf-fill"></i></button>
                                             </form>
                                             <!-- bi-pencil-square -->
-                                            <form action="consultaVisitasPorEmpresa" method="post">
+                                            <!-- <form action="consultaVisitasPorEmpresa" method="post">
                                                 <input type="hidden" name="folioVisita" value="<?php echo $value["folio_visita"]; ?>">
                                                 <button type="submit" class="btn btn-outline-secondary " data-bs-toggle="tooltip" data-bs-placement="top" title="Editar"><i class="bi bi-pencil-square"></i></button>
-                                            </form>
+                                            </form> -->
 
                                             <form action="consultaVisitasPorEmpresa" method="post">
                                                 <input type="hidden" name="folioVisita" value="<?php echo $value["folio_visita"]; ?>">

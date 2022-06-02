@@ -3,16 +3,16 @@
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
-/*
+
 require 'C:/xampp/htdocs/visitas/views/libs/libreria/PHPmailer/src/PHPMailer.php';
 require 'C:/xampp/htdocs/visitas/views/libs/libreria/PHPmailer/src/SMTP.php';
 require 'C:/xampp/htdocs/visitas/views/libs/libreria/PHPmailer/src/Exception.php';
-*/
 
+/*
 require '/home4/conveni2/public_html/visitass/views/libs/libreria/PHPmailer/src/PHPMailer.php';
 require '/home4/conveni2/public_html/visitass/views/libs/libreria/PHPmailer/src/SMTP.php';
 require '/home4/conveni2/public_html/visitass/views/libs/libreria/PHPmailer/src/Exception.php';
-
+*/
 
 Class ControlladorAdministrador {
 
@@ -138,7 +138,7 @@ Class ControlladorAdministrador {
 
                 if($password == $verificar){
                     
-                    $respuesta = ModeloAdministrador::mdlRegistrarUsuario($tabla, $usuarioAdmin, $usuarioAlta, $password);
+                    $respuesta = ModeloAdministrador::mdlRegistrarUsuario($tabla, $usuarioAdmin, $usuarioAlta, $password, $correo);
                     $cuerpo = '
                     Buen dia.<br> Sus credenciales para acceder a <a href="http://mx64.prueba.site/~conveni2/visitass/inicioDocente" target="_blank">Visitas Empresariales</a> son las siguientes: <br><br> USUARIO: <strong>'.$usuarioAlta.'</strong> <br> CONTRASEÑA: <strong>'.$password.'</strong><br><br> Saludos.';
                     
@@ -249,7 +249,36 @@ Class ControlladorAdministrador {
                 if($password == $verificar){
                     
                 $respuesta = ModeloAdministrador::mdlRestaurarPass($tabla, $usuario, $password);
-        
+                $respuesta2 = ModeloAdministrador::mdlUsuarioCorreo($tabla, $usuario);
+                $correo = $respuesta2['correo'];
+                $usser =  $respuesta2['usuario'];
+                
+                $cuerpo = '
+                Buen dia.<br> Se le notifica que su contraseña ha cambiado. Sus credenciales son las siguientes: <br><br> USUARIO: <strong>'.$usser.'</strong> <br> NUEVA CONTRASEÑA: <strong>'.$password.'</strong><br><br> Para verificar, entra al siguiente link --> <a href="http://mx64.prueba.site/~conveni2/visitass/inicioDocente" target="_blank">Visitas Empresariales</a>';
+                
+                $mail = new PHPMailer(true);
+            
+                try {
+                
+                    $mail->isSMTP();
+                    $mail->Host = 'smtp.gmail.com';
+                    $mail->SMTPAuth = true;
+                    $mail->Username = 'deptogestionyvinculacion@gmail.com';
+                    $mail->Password = 'gestion*99';
+                    $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+                    $mail->Port = 587;
+                
+                    $mail->setFrom('deptogestionyvinculacion@gmail.com', 'DEPARTAMENTO DE GESTIÓN TECNOLOGIA Y VINCULACIÓN');
+                    $mail->addAddress($correo);
+                
+                    $mail->isHTML(true);
+                    $mail->Subject = 'Restauracion de contraseña';
+                    $mail->Body = $cuerpo;
+                    $mail->CharSet = 'UTF-8';
+                    $mail->send();
+                } catch (Exception $e) {
+                echo $e;
+                }
                 return $respuesta;
                 }else {
                     return "2";
@@ -312,6 +341,64 @@ Class ControlladorAdministrador {
         return $respuesta;
     }
 
+    static public function ctrRestaurarPasswordAlumno()
+    {
+        if (isset($_POST['nuevoPasswordA'])) {
+            if(!empty($_POST["noControl"]) && !empty($_POST["passwordNuevoA"]) && !empty($_POST["verificarNuevoA"])){
+
+                
+                $tabla = "estudiantes";
+                $usuario =  $_POST["noControl"];
+
+                $password = $_POST["passwordNuevoA"];
+                $verificar = $_POST["verificarNuevoA"];
+
+                if($password == $verificar){
+                $hash = password_hash($password, PASSWORD_DEFAULT, ['cost' => 10]);
+                $respuesta = ModeloAdministrador::mdlRestaurarPassAlumno($tabla, $usuario, $hash);
+                $respuesta2 = ModeloAdministrador::mdlAlumnoCorreo($tabla, $usuario);
+                $correo = $respuesta2['correo'];
+
+                
+                $cuerpo = '
+                Buen dia Alumno.<br> Se le notifica que su contraseña ha cambiado. Sus credenciales son las siguientes: <br><br> CORREO: <strong>'.$correo.'</strong> <br> NUEVA CONTRASEÑA: <strong>'.$password.'</strong><br> NUMERO DE CONTROL: <strong>'.$usuario.'</strong><br><br> Para verificar, entra al siguiente link --> <a href="http://mx64.prueba.site/~conveni2/visitass/inicioEstudiante" target="_blank">Visitas Empresariales</a>';
+                
+                $mail = new PHPMailer(true);
+            
+                try {
+                
+                    $mail->isSMTP();
+                    $mail->Host = 'smtp.gmail.com';
+                    $mail->SMTPAuth = true;
+                    $mail->Username = 'deptogestionyvinculacion@gmail.com';
+                    $mail->Password = 'gestion*99';
+                    $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+                    $mail->Port = 587;
+                
+                    $mail->setFrom('deptogestionyvinculacion@gmail.com', 'DEPARTAMENTO DE GESTIÓN TECNOLOGIA Y VINCULACIÓN');
+                    $mail->addAddress($correo);
+                
+                    $mail->isHTML(true);
+                    $mail->Subject = 'Restauracion de contraseña';
+                    $mail->Body = $cuerpo;
+                    $mail->CharSet = 'UTF-8';
+                    $mail->send();
+                } catch (Exception $e) {
+                echo $e;
+                }
+                return $respuesta;
+                }else {
+                    return "2";
+                }
+
+                
+
+            }else {
+                return "1";
+            }
+
+        }
+    }
 
 }
 

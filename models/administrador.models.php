@@ -109,7 +109,7 @@ class ModeloAdministrador
     static public function mdlTablaUsuario()
     {
         try {
-            $stmt = DB::conectar()->prepare("SELECT id_docente, usuario, password, estatus, usuario_registro, fecha_registro FROM  docente WHERE rol = 'DOCENTE'");
+            $stmt = DB::conectar()->prepare("SELECT id_docente, usuario, password, estatus, usuario_registro, fecha_registro, correo FROM  docente WHERE rol = 'DOCENTE'");
             $stmt->execute();
             return  $stmt->fetchAll();
 
@@ -120,13 +120,14 @@ class ModeloAdministrador
         }
     }
 
-    static public function mdlRegistrarUsuario($tabla, $usuarioAdmin, $usuarioDocente, $password)
+    static public function mdlRegistrarUsuario($tabla, $usuarioAdmin, $usuarioDocente, $password, $correo)
     {
         try {
-            $stmt = DB::conectar()->prepare("INSERT INTO $tabla(usuario, usuario_registro, password, rol) VALUES (:usuario, :usuario_registro, :password, 'DOCENTE')");
+            $stmt = DB::conectar()->prepare("INSERT INTO $tabla(usuario, usuario_registro, password, correo, rol) VALUES (:usuario, :usuario_registro, :password, :correo, 'DOCENTE')");
 
             $stmt->bindParam(":usuario", $usuarioDocente, PDO::PARAM_STR);
             $stmt->bindParam(":usuario_registro", $usuarioAdmin, PDO::PARAM_STR);
+            $stmt->bindParam(":correo", $correo, PDO::PARAM_STR);
             $stmt->bindParam(":password", $password, PDO::PARAM_STR);
 
 
@@ -379,6 +380,63 @@ class ModeloAdministrador
             $stmt = null;
         } catch (Exception $e) {
             return "error";
+        }
+    }
+
+    
+    static public function mdlUsuarioCorreo($tabla, $id){
+        try{
+
+            $stmt = DB::conectar()->prepare("SELECT usuario, correo FROM $tabla WHERE id_docente = :id_docente");
+            $stmt->bindParam(":id_docente", $id, PDO::PARAM_INT);
+            $stmt->execute();
+            return $stmt-> fetch();
+
+        }catch(Exception $e) {
+            return "error"; 
+        } finally{
+            $stmt->closeCursor();
+            $stmt = null;
+        }
+
+    }
+
+    static public function mdlAlumnoCorreo($tabla, $id){
+        try{
+
+            $stmt = DB::conectar()->prepare("SELECT correo FROM $tabla WHERE no_control = :no_control");
+            $stmt->bindParam(":no_control", $id, PDO::PARAM_INT);
+            $stmt->execute();
+            return $stmt-> fetch();
+
+        }catch(Exception $e) {
+            return "error"; 
+        } finally{
+            $stmt->closeCursor();
+            $stmt = null;
+        }
+
+    }
+
+    static public function mdlRestaurarPassAlumno($tabla, $usuario, $password)
+    {
+        try {
+            $stmt = DB::conectar()->prepare("UPDATE $tabla SET password = :password WHERE no_control = :no_control");
+
+            $stmt->bindParam(":password", $password, PDO::PARAM_STR);
+            $stmt->bindParam(":no_control", $usuario, PDO::PARAM_INT);
+
+            if ($stmt->execute()) {
+                return "exito";
+                $stmt->closeCursor();
+            $stmt = null;
+            } else {
+                return "error";
+                $stmt->closeCursor();
+                $stmt = null;
+            }
+        } catch (Exception $e) {
+            return $e;
         }
     }
 
