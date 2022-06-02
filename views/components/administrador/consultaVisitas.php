@@ -74,7 +74,7 @@ $datos = ControlladorAdministrador::ctrListasVisitas();
 
                                             <button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#exampleModalAdminVisitas" data-bs-whatever="<?php echo $value['folio_visita']; ?>" title="Editar estatus"><i class="bi bi-gear-fill"></i></button>
 
-                                            <form action="editarVisita" method="post">
+                                            <form action="views/components/administrador/pdfs/formatoVisitasEmp.php" method="post" target="_blank">
                                                 <input type="hidden" name="folioVisita-pdf" value="<?php echo $value["folio_visita"]; ?>">
                                                 <button type="submit" class="btn btn-outline-danger " data-bs-toggle="tooltip" data-bs-placement="top" title="Formato de visitas"><i class="bi bi-file-earmark-pdf-fill"></i></button>
                                             </form>
